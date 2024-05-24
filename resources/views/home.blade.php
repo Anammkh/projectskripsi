@@ -1,23 +1,81 @@
-@extends('layouts.app')
-
+@extends('layouts.template')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-6 col-xl-3">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <span class="text-muted text-uppercase fs-12 fw-bold">Today Revenue</span>
+                            <h3 class="mb-0">$2100</h3>
                         </div>
-                    @endif
+                        <div class="align-self-center flex-shrink-0">
+                            <div id="today-revenue-chart" class="apex-charts"></div>
+                            <span class="text-success fw-bold fs-13">
+                                <i class='uil uil-arrow-up'></i> 10.21%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    {{ __('You are logged in!') }}
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <span class="text-muted text-uppercase fs-12 fw-bold">Product Sold</span>
+                            <h3 class="mb-0">558</h3>
+                        </div>
+                        <div class="align-self-center flex-shrink-0">
+                            <div id="today-product-sold-chart" class="apex-charts"></div>
+                            <span class="text-danger fw-bold fs-13">
+                                <i class='uil uil-arrow-down'></i> 5.05%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <span class="text-muted text-uppercase fs-12 fw-bold">New Customers</span>
+                            <h3 class="mb-0">65</h3>
+                        </div>
+                        <div class="align-self-center flex-shrink-0">
+                            <div id="today-new-customer-chart" class="apex-charts"></div>
+                            <span class="text-success fw-bold fs-13">
+                                <i class='uil uil-arrow-up'></i> 25.16%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <span class="text-muted text-uppercase fs-12 fw-bold">NewVisitors</span>
+                            <h3 class="mb-0">958</h3>
+                        </div>
+                        <div class="align-self-center flex-shrink-0">
+                            <div id="today-new-visitors-chart" class="apex-charts"></div>
+                            <span class="text-danger fw-bold fs-13">
+                                <i class='uil uil-arrow-down'></i> 5.05%
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
