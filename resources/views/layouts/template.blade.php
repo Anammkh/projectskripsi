@@ -11,17 +11,17 @@
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.ico">
 
 		<!-- App css -->
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-		<link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+		<link href="{{asset('assets')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+		<link href="{{asset('assets')}}/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-		<link href="assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled />
-		<link href="assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet"  disabled />
+		<link href="{{asset('assets')}}/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled />
+		<link href="{{asset('assets')}}/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet"  disabled />
 
 		<!-- icons -->
-		<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="{{asset('assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -79,7 +79,7 @@
                                             <!-- item-->
                                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                                 <div class="d-flex text-align-start">
-                                                    <img class="me-2 rounded-circle" src="assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
+                                                    <img class="me-2 rounded-circle" src="{{asset('assets')}}/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
                                                     <div class="flex-grow-1">
                                                         <h5 class="m-0 fs-14">Shirley Miller</h5>
                                                         <span class="fs-12 mb-0">UI Designer</span>
@@ -90,7 +90,7 @@
                                             <!-- item-->
                                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                                 <div class="d-flex text-align-start">
-                                                    <img class="me-2 rounded-circle" src="assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
+                                                    <img class="me-2 rounded-circle" src="{{asset('assets')}}/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
                                                     <div class="flex-grow-1">
                                                         <h5 class="m-0 fs-14">Timothy Moreno</h5>
                                                         <span class="fs-12 mb-0">Frontend Developer</span>
@@ -131,19 +131,19 @@
                                     <div class="row g-0">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/slack.png" alt="slack">
+                                                <img src="{{asset('assets')}}/images/brands/slack.png" alt="slack">
                                                 <span>Slack</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/github.png" alt="Github">
+                                                <img src="{{asset('assets')}}/images/brands/github.png" alt="Github">
                                                 <span>GitHub</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/dribbble.png" alt="dribbble">
+                                                <img src="{{asset('assets')}}/images/brands/dribbble.png" alt="dribbble">
                                                 <span>Dribbble</span>
                                             </a>
                                         </div>
@@ -161,31 +161,31 @@
     
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> 
+                                    <img src="{{asset('assets')}}/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> 
                                     <span class="align-middle">English</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> 
+                                    <img src="{{asset('assets')}}/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> 
                                     <span class="align-middle">German</span>
                                 </a>
     
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> 
+                                    <img src="{{asset('assets')}}/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> 
                                     <span class="align-middle">Italian</span>
                                 </a>
     
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> 
+                                    <img src="{{asset('assets')}}/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> 
                                     <span class="align-middle">Spanish</span>
                                 </a>
     
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> 
+                                    <img src="{{asset('assets')}}/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> 
                                     <span class="align-middle">Russian</span>
                                 </a>
     
@@ -220,7 +220,7 @@
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
                                         <div class="notify-icon">
-                                            <img src="assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
+                                            <img src="{{asset('assets')}}/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
                                         </div>
                                         <p class="notify-details">Karen Robinson</p>
                                         <p class="text-muted mb-0 user-msg">
@@ -231,7 +231,7 @@
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
                                         <div class="notify-icon">
-                                            <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                            <img src="{{asset('assets')}}/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
                                         </div>
                                         <p class="notify-details">Cristina Pride</p>
                                         <p class="text-muted mb-0 user-msg">
@@ -276,7 +276,7 @@
     
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                <img src="{{asset('assets')}}/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
                                     Nik Patel <i class="uil uil-angle-down"></i> 
                                 </span>
@@ -323,24 +323,25 @@
                     <div class="logo-box">
                         <a href="index.html" class="logo logo-dark">
                             <span class="logo-sm">
-                                <span style="font-size: 24px; font-weight: bold;">BKK KANDEMAN</span>
+                                <img src="{{asset('assets')}}/images/logo-sm.png" alt="" height="24">
                                 <!-- <span class="logo-lg-text-light">Shreyu</span> -->
                             </span>
                             <span class="logo-lg">
-                                <span style="font-size: 24px; font-weight: bold;">BKK KANDEMAN</span>
+                                <img src="{{asset('assets')}}/images/logo-dark.png" alt="" height="24">
                                 <!-- <span class="logo-lg-text-light">S</span> -->
                             </span>
                         </a>
                     
                         <a href="index.html" class="logo logo-light">
                             <span class="logo-sm">
-                                <span style="font-size: 24px; font-weight: bold;">BKK KANDEMAN</span>
+                                <img src="{{asset('assets')}}/images/logo-sm.png" alt="" height="24">
                             </span>
                             <span class="logo-lg">
-                                <span style="font-size: 24px; font-weight: bold;">BKK KANDEMAN</span>
+                                <img src="{{asset('assets')}}/images/logo-light.png" alt="" height="24">
                             </span>
                         </a>
                     </div>
+                    
                     
     
                     <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
@@ -374,7 +375,7 @@
 
                     <!-- User box -->
                     <div class="user-box text-center">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+                        <img src="{{asset('assets')}}/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
                         <div class="dropdown">
                             <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown">Nik Patel</a>
                             <div class="dropdown-menu user-pro-dropdown">
@@ -409,8 +410,7 @@
                             <!-- <li class="menu-title">Navigation</li> -->
 
                             <li>
-                                <a href="#sidebarDashboard" data-bs-toggle="collapse">
-                                    <span class="badge bg-success float-end">02</span>
+                                <a href="home">
                                     <i data-feather="home"></i>
                                     <span> Dashboards </span>
                                     <!-- <span class="menu-arrow"></span> -->
@@ -422,7 +422,7 @@
                             <li>
                                 <a href="apps-calendar.html">
                                     <i data-feather="calendar"></i>
-                                    <span>Pelamr </span>
+                                    <span>Pelamar </span>
                                 </a>
                             </li>
 
@@ -464,7 +464,7 @@
                             <li class="menu-title mt-2">Custom</li>
 
                             <li>
-                                <a href="usermanajemen">
+                                <a href="/usermanajemen">
                                     <i data-feather="file-text"></i>
                                     <span> User Manajemen </span>
                                 </a>
@@ -645,10 +645,13 @@
         <div class="rightbar-overlay"></div>
 
         <!-- Vendor js -->
-        <script src="assets/js/vendor.min.js"></script>
+        <script src="{{asset('assets')}}/js/vendor.min.js"></script>
 
         <!-- App js -->
-        <script src="assets/js/app.min.js"></script>
+        <script src="{{asset('assets')}}/js/app.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+   
         
     </body>
 

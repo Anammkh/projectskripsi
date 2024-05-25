@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/usermanajemen', [UserController::class, 'index'])->name('usermanajemen');
+    Route::resource('usermanajemen', UserController::class);
 
     
 });
