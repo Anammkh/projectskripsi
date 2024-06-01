@@ -110,4 +110,12 @@ class LowonganController extends Controller
         return redirect()->route('lowongan.index')
                          ->with('success', 'Lowongan berhasil dihapus.');
     }
+
+    public function showDetail($id)
+    {
+        $lowongan = Lowongan::with('jurusan', 'mitra')->findOrFail($id);
+        
+        // Jika Anda ingin mengirim data dalam format JSON
+        return response()->json($lowongan);
+    }
 }

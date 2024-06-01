@@ -44,6 +44,9 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/halamanpelamar', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/semualowongan', [LowonganController::class, 'indexPelamar'])->name('Pelamar.semualowongan');
+    Route::get('lowongan/detail/{id}', [LowonganController::class, 'showDetail'])->name('lowongan.detail');
+
+
     Route::post('lowongan/{lowongan}/lamar', [LamaranController::class, 'lamar'])->name('lowongan.lamar');
     Route::get('/status', [LamaranController::class, 'statusPendaftaran'])->name('lamaran.status');
     Route::get('/complete-profile', [UserController::class, 'showCompleteProfileForm'])->name('complete-profile-form');

@@ -21,7 +21,7 @@ class Lowongan extends Model
 
     public function jurusan()
     {
-        return $this->belongsToMany(Jurusan::class);
+        return $this->belongsTo(Jurusan::class);
     }
 
     public function mitra()
