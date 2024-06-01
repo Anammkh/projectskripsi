@@ -23,9 +23,9 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign keys
-            $table->foreign('jurusan_id')->references('id')->on('jurusans');
-            $table->foreign('mitra_id')->references('id')->on('mitras');
-            $table->foreign('skil_id')->references('id')->on('skils');
+            $table->foreign('jurusan_id')->references('id')->on('jurusans')->onDelete('cascade');
+            $table->foreign('mitra_id')->references('id')->on('mitras')->onDelete('cascade');
+            $table->foreign('skil_id')->references('id')->on('skils')->onDelete('cascade');
 
         });
     }

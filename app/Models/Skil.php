@@ -10,4 +10,9 @@ class Skil extends Model
     use HasFactory;
 
     protected $fillable = ['nama'];
+
+    public function lowongans()
+    {
+        return $this->belongsToMany(Lowongan::class);
+    }
 }

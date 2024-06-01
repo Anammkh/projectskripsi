@@ -8,10 +8,10 @@
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                 </div>
-            @endif
+                @endif
                 <h4 class="header-title mt-0 mb-1">Tabel Lowongan</h4>
-                </p>
-                <a href="{{ route('lowongan.create') }}" class="btn btn-primary">Tambah lowongan</a>
+            </p>
+                <a href="{{ route('lowongan.create') }}" class="btn btn-primary mb-3">Tambah Lowongan</a>
                 <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
@@ -33,8 +33,9 @@
                             <td>{{ $lowongan->persyaratan }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="" class="btn btn-primary mr-2">Edit</a>
-                                    <form action="" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');" style="display: inline;">
+                                    <a href="{{ route('lowongan.show', $lowongan->id) }}" class="btn btn-info mr-2">Lihat Detail</a>
+                                    <a href="{{ route('lowongan.edit', $lowongan->id) }}" class="btn btn-primary mr-2">Edit</a>
+                                    <form action="{{ route('lowongan.destroy', $lowongan->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus lowongan ini?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Hapus</button>

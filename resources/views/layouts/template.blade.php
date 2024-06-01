@@ -422,14 +422,14 @@
                             <li class="menu-title mt-2">Apps</li>
 
                             <li>
-                                <a href="apps-calendar.html">
+                                <a href="/pelamar">
                                     <i data-feather="calendar"></i>
                                     <span>Pelamar </span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="apps-chat.html">
+                                <a href="/lamaran">
                                     <i data-feather="message-square"></i>
                                     <span> Lamaran </span>
                                 </a>
