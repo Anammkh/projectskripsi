@@ -21,14 +21,16 @@ return new class extends Migration
             $table->string('no_hp');
             $table->unsignedBigInteger('jurusan_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('dokumen_id');
+            $table->string('ktp');
+            $table->string('ijazah');
+            $table->string('transkip_nilai');
+            $table->string('cv');
             $table->unsignedBigInteger('skil_id');
             $table->timestamps();
 
             // Foreign keys
             $table->foreign('jurusan_id')->references('id')->on('jurusans');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('dokumen_id')->references('id')->on('dokumens');
             $table->foreign('skil_id')->references('id')->on('skils');
 
         });

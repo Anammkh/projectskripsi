@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MitraController extends Controller
 {
@@ -15,25 +16,25 @@ class MitraController extends Controller
 
     public function create()
     {
-        return view('Admin.createmitra');
+        $response = Http::get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+        $provinces = $response->json();
+        return view('Admin.createmitra', compact('provinces'));
     }
 
     public function store(Request $request)
     {
+      
      // Validasi input
     $request->validate([
         'nama' => 'required|string|max:255',
         'alamat' => 'required|string||max:255|',
         'deskripsi' => 'required|string|',
-        'gambar' => 'nullable|string|',
+        'gambar' => 'nullable',
     ]);
-    $imageName = ''; // Mendefinisikan variabel imageName sebelum penggunaannya
+    $imageName = ''; 
 
-    // Memeriksa apakah ada file gambar yang diunggah
     if ($request->hasFile('gambar')) {
-        // Menghasilkan nama unik untuk file gambar
         $imageName = time().'.'.$request->gambar->extension();  
-        // Memindahkan file gambar yang diunggah ke direktori penyimpanan
         $request->gambar->move(public_path('images'), $imageName);
     }
     // Simpan pengguna baru
@@ -42,6 +43,7 @@ class MitraController extends Controller
         'alamat' => $request->alamat,
         'deskripsi' => $request->deskripsi,
         'gambar' => $imageName,
+        'kota' => $request->kota,
     ]);
 
     // Redirect ke halaman daftar pengguna dengan pesan sukses
@@ -60,21 +62,21 @@ class MitraController extends Controller
         'nama' => 'required',
         'alamat' => 'required',
         'deskripsi' => 'required',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'gambar' => 'nullable',
     ]);
 
-    // Jika ada file gambar yang diunggah
+    $imageName = ''; 
+
     if ($request->hasFile('gambar')) {
         $imageName = time().'.'.$request->gambar->extension();  
         $request->gambar->move(public_path('images'), $imageName);
-        // Simpan nama file gambar baru
-        $mitra->gambar = $imageName;
     }
 
     // Perbarui data mitra
     $mitra->nama = $request->nama;
     $mitra->alamat = $request->alamat;
     $mitra->deskripsi = $request->deskripsi;
+    $mitra->gambar = $imageName;
 
     $mitra->save();
 

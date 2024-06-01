@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pelamar;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -31,27 +32,17 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $pelamar = Pelamar::create([
-            'user_id' => $user->id,
-            // Tambahkan atribut-atribut lain yang sesuai dengan data pelamar
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'ttl' => $request->ttl,
-            'sekolah' => $request->sekolah,
-            'alamat' => $request->alamat,
-            'tinggi' => $request->tinggi,
-            'no_hp' => $request->no_hp,
-            'jurusan_id' => $request->jurusan_id,
-            // dan seterusnya...
-        ]);
-    }
-
-    protected function registered(Request $request, $user)
-    {
-        $request->session()->put('new_user_id', $user->id);
+    
+        $pelamar = new Pelamar();
+        $pelamar->user_id = $user->id; 
+        $pelamar->save();
+    
+        return $user;
+      
     }
 }

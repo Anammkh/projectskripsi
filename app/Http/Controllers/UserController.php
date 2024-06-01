@@ -8,6 +8,8 @@ use App\Models\Skil;
 use App\Models\Pelamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function index()
@@ -21,43 +23,47 @@ class UserController extends Controller
    {
        $jurusans = Jurusan::all();
        $skils = Skil::all();
-       return view('auth.complete-profil', compact('jurusans', 'skils'));
+       $userId = Auth::id();
+       $pelamar = Pelamar::where('user_id', $userId)->first();
+       
+       $response = Http::get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+        $provinces = $response->json();
+       if (!$pelamar) {
+           $pelamar = new Pelamar();
+           $pelamar->user_id = $userId;
+       }
+   
+       return view('auth.complete-profil', compact('pelamar','skils','jurusans','provinces'));
+
    }    
+   
 
    public function completeProfile(Request $request)
-   {   
-       $request->validate([
-           'jenis_kelamin' => ['required', 'string', 'max:255'],
-           'ttl' => ['required', 'date'],
-           'sekolah' => ['required', 'string', 'max:255'],
-           'alamat' => ['required', 'string'],
-           'tinggi' => ['required', 'integer'],
-           'no_hp' => ['required', 'string', 'max:15'],
-           'jurusan_id' => ['required', 'integer', 'exists:jurusans,id'],
-           'dokumen_id' => ['required', 'integer', 'exists:dokumens,id'],
-           'skil_id' => ['required', 'integer', 'exists:skils,id'],
-       ]);
+{
+    $userId = Auth::id();
+    $pelamar = Pelamar::firstOrCreate(['user_id' => $userId]);
 
-       $userId = Auth::id();
-       $user = User::findOrFail($userId);
-     
-       Pelamar::create([
-           'user_id' => $user->id,
-           'jenis_kelamin' => $request->jenis_kelamin,
-           'ttl' => $request->ttl,
-           'sekolah' => $request->sekolah,
-           'alamat' => $request->alamat,
-           'tinggi' => $request->tinggi,
-           'no_hp' => $request->no_hp,
-           'jurusan_id' => $request->jurusan_id,
-           'dokumen_id' => $request->dokumen_id,
-           'skil_id' => $request->skil_id,
-       ]);
-
-       return redirect('semualowongan')->with('success', 'Profile completed successfully.');
-   
-    // Redireksi atau berikan pesan sukses
+    // Menangani upload file
+    $fileFields = ['cv', 'ktp', 'transkip_nilai', 'ijazah'];
+    foreach ($fileFields as $field) {
+        if ($request->hasFile($field)) {
+            // Hapus file lama jika ada
+            if ($pelamar->$field) {
+                // Hapus file lama
+                Storage::delete($pelamar->$field);
+            }
+            // Pindahkan file baru
+            $path = $request->file($field)->move(public_path('documents'), $request->file($field)->getClientOriginalName());
+            $pelamar->$field = '/documents/' . $request->file($field)->getClientOriginalName();
+        }
     }
+
+    // Update data pelamar
+    $pelamar->fill($request->except($fileFields));
+    $pelamar->save();
+
+    return redirect()->route('complete-profile-form')->with('success', 'Profil berhasil diperbarui.');
+}
 
 
 

@@ -18,8 +18,12 @@ class Pelamar extends Model
         'no_hp',
         'jurusan_id',
         'user_id',
-        'dokumen_id',
+        'cv',
+        'ktp',
+        'transkip_nilai',
+        'ijazah',
         'skil_id',
+        'kota'
     ];
 
     // Definisikan relasi dengan tabel lain jika diperlukan
@@ -34,11 +38,6 @@ class Pelamar extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Definisikan relasi dengan tabel lain jika diperlukan
-    public function dokumen()
-    {
-        return $this->belongsTo(Dokumen::class);
-    }
 
     // Definisikan relasi dengan tabel lain jika diperlukan
     public function skil()

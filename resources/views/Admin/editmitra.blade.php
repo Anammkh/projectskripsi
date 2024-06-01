@@ -20,7 +20,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('mitra.update', $mitra->id) }}" method="POST">
+                <form action="{{ route('mitra.update', $mitra->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

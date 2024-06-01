@@ -50,7 +50,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            @include('Admin.formjurusan', ['jurusan' => $jurusan])
+                                            <div class="form-group">
+                                                <label for="nama">Nama</label>
+                                                <input type="text" class="form-control" id="nama" name="nama" value="{{  $jurusan->nama }}" required>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -81,7 +84,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @include('Admin.formjurusan')
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

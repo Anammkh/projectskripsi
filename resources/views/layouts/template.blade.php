@@ -10,6 +10,8 @@
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.ico">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -24,6 +26,8 @@
 
 		<!-- icons -->
 		<link href="{{asset('assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+        
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     </head>
 
@@ -650,6 +654,14 @@
         <script src="{{asset('assets')}}/js/vendor.min.js"></script>
 
         <!-- App js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- Inisialisasi Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
         <script src="{{asset('assets')}}/js/app.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Add these inside the <head> or before the closing </body> tag -->

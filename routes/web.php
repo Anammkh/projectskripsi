@@ -10,11 +10,7 @@ use App\Http\Controllers\SkilController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelamarController;
-
-
-
-
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +28,6 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('usermanajemen', UserController::class);
@@ -44,27 +39,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('lamarans/{lamaran}/accept', [LamaranController::class, 'accept'])->name('lamarans.accept');
     Route::post('lamarans/{lamaran}/reject', [LamaranController::class, 'reject'])->name('lamarans.reject');
     Route::get('pelamar', [PelamarController::class, 'index'])->name('pelamar');
-
-
-
-
-
-    
 });
 Auth::routes();
-Route::middleware(['auth', 'isPelamar'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/halamanpelamar', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/semualowongan', [LowonganController::class, 'indexPelamar'])->name('Pelamar.semualowongan');
+    Route::get('/semualowongan', [LowonganController::class, 'indexPelamar'])->name('Pelamar.semualowongan');
     Route::post('lowongan/{lowongan}/lamar', [LamaranController::class, 'lamar'])->name('lowongan.lamar');
+    Route::get('/status', [LamaranController::class, 'statusPendaftaran'])->name('lamaran.status');
     Route::get('/complete-profile', [UserController::class, 'showCompleteProfileForm'])->name('complete-profile-form');
     Route::post('/complete-profile', [UserController::class, 'completeProfile'])->name('complete-profile');
-
-
-
 });
-
-
-    
-
-
-

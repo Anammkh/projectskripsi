@@ -12,7 +12,7 @@
                 @endif
                 <h4 class="header-title mt-0 mb-1">Tabel Skil</h4>
             </p>
-                <a class="btn btn-primary mb-3" data-toggle="modal" data-target="#createModal">Tambah Skil</a>
+                <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#createModal">Tambah Skil</button>
                
                 <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                     <thead>
@@ -51,7 +51,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            @include('Admin.formskil', ['skil' => $skil])
+                                            <div class="form-group">
+                                                <label for="nama">Nama</label>
+                                                <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama', $skil->nama ?? '') }}" required>
+                                            </div>                                            
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -82,7 +85,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @include('Admin.formskil')
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -92,15 +99,14 @@
         </div>
     </div>
 </div>
+
+@endsection
+
 @section('scripts')
     @parent
     <script>
-        // Hapus alert setelah 5 detik
         setTimeout(function() {
             $('.alert').fadeOut('fast');
         }, 3000);
     </script>
-@endsection
-
-
 @endsection

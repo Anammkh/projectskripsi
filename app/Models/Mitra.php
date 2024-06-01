@@ -12,7 +12,8 @@ class Mitra extends Model
         'nama', 
         'alamat', 
         'deskripsi', 
-        'gambar'
+        'gambar',
+        'kota',
     ];
 
 }

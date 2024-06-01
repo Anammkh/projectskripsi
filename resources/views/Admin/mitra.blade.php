@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $mitra->nama }}</td>
-                            <td>{{ $mitra->gambar }}</td>
+                            <td><img src="{{ asset('images/'. $mitra->gambar) }}" alt="" width="100"></td>
                             <td>{{ $mitra->alamat}}</td>
                             <td>{{ $mitra->deskripsi }}</td>
                             <td>
