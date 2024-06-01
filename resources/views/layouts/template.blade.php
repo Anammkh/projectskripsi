@@ -12,6 +12,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.ico">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
 		<!-- App css -->
 		<link href="{{asset('assets')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -410,7 +412,7 @@
                             <!-- <li class="menu-title">Navigation</li> -->
 
                             <li>
-                                <a href="home">
+                                <a href="/home">
                                     <i data-feather="home"></i>
                                     <span> Dashboards </span>
                                     <!-- <span class="menu-arrow"></span> -->
@@ -434,28 +436,28 @@
                             </li>
 
                             <li>
-                                <a href="#sidebarEmail" >
+                                <a href="/mitra" >
                                     <i data-feather="mail"></i>
                                     <span> Mitra </span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="#sidebarProjects">
+                                <a href="/jurusan">
                                     <i data-feather="briefcase"></i>
                                     <span> Jurusan </span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="#sidebarTasks">
+                                <a href="/skil">
                                     <i data-feather="clipboard"></i>
                                     <span> Skils</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="apps-file-manager.html">
+                                <a href="/lowongan">
                                     <i data-feather="file-plus"></i>
                                     <span> Lowongan </span>
                                 </a>
@@ -650,8 +652,13 @@
         <!-- App js -->
         <script src="{{asset('assets')}}/js/app.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Add these inside the <head> or before the closing </body> tag -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     
-   
+     @yield('scripts')
         
     </body>
 

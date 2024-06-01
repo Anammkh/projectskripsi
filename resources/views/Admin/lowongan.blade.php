@@ -8,33 +8,33 @@
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                 </div>
-                 @endif
-                <h4 class="header-title mt-0 mb-1">Daftar User</h4>
+            @endif
+                <h4 class="header-title mt-0 mb-1">Tabel Lowongan</h4>
                 </p>
-                <a href="{{ route('usermanajemen.create') }}" class="btn btn-primary mb-3">Tambah User</a>
+                <a href="{{ route('lowongan.create') }}" class="btn btn-primary">Tambah lowongan</a>
                 <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Gambar</th>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th>Judul</th>
+                            <th>Batas Waktu</th>
+                            <th>Posisi</th>
+                            <th>Persyaratan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($lowongans as $lowongan)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->gambar }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->roles }}</td>
+                            <td>{{ $lowongan->judul }}</td>
+                            <td>{{ $lowongan->batas_waktu }}</td>
+                            <td>{{ $lowongan->posisi }}</td>
+                            <td>{{ $lowongan->persyaratan }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('usermanajemen.edit', $user->id) }}" class="btn btn-primary mr-2">Edit</a>
-                                    <form action="{{ route('usermanajemen.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');" style="display: inline;">
+                                    <a href="" class="btn btn-primary mr-2">Edit</a>
+                                    <form action="" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -49,13 +49,4 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 </div>
-@section('scripts')
-    @parent
-    <script>
-        // Hapus alert setelah 5 detik
-        setTimeout(function() {
-            $('.alert').fadeOut('fast');
-        }, 3000);
-    </script>
-@endsection
 @endsection
