@@ -68,11 +68,19 @@ class LamaranController extends Controller
 
     
     
-    public function accept(Lamaran $lamaran)
-    {
-        $lamaran->update(['status' => 'Diterima']);
-        return redirect()->route('lamaran.index')->with('success', 'Lamaran diterima.');
-    }
+public function accept(Request $request, $id)
+{
+    $request->validate([
+        'tanggal_wawancara' => 'required|date',
+    ]);
+
+    $lamaran = Lamaran::findOrFail($id);
+    $lamaran->status = 'Diterima';
+    $lamaran->tanggal_wawancara = $request->tanggal_wawancara;
+    $lamaran->save();
+
+    return redirect()->route('lamaran.index')->with('success', 'Lamaran berhasil diterima.');
+}
 
     public function reject(Lamaran $lamaran)
     {
@@ -80,9 +88,15 @@ class LamaranController extends Controller
         return redirect()->route('lamaran.index')->with('success', 'Lamaran ditolak.');
     }
 
-    public function statusPendaftaran(){
-        $lamarans = Lamaran::with('pelamar', 'lowongan')->get();
-
-        return view('Pelamar.statuspendaftaran', compact('lamarans'));   
-     }
+    public function statusPendaftaran()
+    {
+        $dataLamaran = Lamaran::with('pelamar', 'lowongan')->get();
+    
+        $lamarans = $dataLamaran->sortByDesc(function ($lamaran) {
+            return $lamaran->status == 'Diterima' ? 1 : 0;
+        });
+    
+        return view('Pelamar.statuspendaftaran', compact('lamarans'));
+    }
+    
 }

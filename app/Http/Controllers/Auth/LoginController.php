@@ -28,7 +28,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (auth()->user()->roles !== 'admin') {
-            return '/halamanpelamar';
+            return '/complete-profil';
         } else{
             return '/home';
         }

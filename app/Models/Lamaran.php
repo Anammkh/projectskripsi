@@ -13,6 +13,7 @@ class Lamaran extends Model
         'pelamar_id',
         'lowongan_id',
         'tanggal',
+        'tanggal_wawancara',
         'status'
     ];
 

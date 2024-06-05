@@ -1,88 +1,192 @@
 @extends('Pelamar.halamanpelamar')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+<style>
+    .card-lowongan {
+        cursor: pointer;
+        transition: border 0.3s ease;
+        border-radius: 16px;
+        border: 1px solid transparent;
+    }
 
-    <div class="row mt-2 ">
-        <div class="col-md-4 mb-4 overflow-scroll">
-            @foreach ($lowongans as $lowongan)
-                <div class="card border-0 shadow p-3">
-                    <div class="d-flex align-items-center">
-                        <img src="{{ asset('images/' . $lowongan->mitra->gambar) }}"
-                            style="border-radius: 50%;height:100px;width:100px" alt="Mitra Image">
-                        <div class="d-flex row text-center">
-                            <h3 class="fw-semibold">{{ $lowongan->mitra->nama }}</h3>
-                            <span>{{ $lowongan->mitra->alamat }}</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title fw-semibold">{{ $lowongan->judul }}</h4>
-                        <p class="card-text m-0">Posisi: {{ $lowongan->posisi }}</p>
-                    </div>
-                    <div>
-                        <a href="#" class="btn btn-primary d-block w-100 mb-1 detail-btn"
-                            onclick="showDetail({{ $lowongan->id }})">Detail</a>
-                        @if (!in_array($lowongan->id, $appliedJobIds))
-                            <form method="POST" action="{{ route('lowongan.lamar', $lowongan->id) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-success d-block w-100">Lamar</button>
-                            </form>
-                        @else
-                            <button type="button" class="btn btn-secondary d-block w-100" disabled>Sudah Dilamar</button>
-                        @endif
+    .card-lowongan:hover {
+        border: 1px solid rgb(65, 65, 240);
+    }
+
+    .card-lowongan.active {
+        border: 2px solid rgb(65, 65, 240);
+    }
+
+    .detail-card {
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .detail-card .card-body {
+        padding: 20px;
+    }
+
+    .detail-card .info {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .detail-card .info-icon {
+        margin-right: 10px;
+        color: #007bff;
+    }
+
+    .detail-card .info-text {
+        flex-grow: 1;
+    }
+</style>
+
+<div class="row mt-3 mb-2">
+    <div class="col-md-12">
+        <div class="row mb-2 align-items-center ">
+            <div class="col-md-2 text-start">
+                <span class="fw-semibold">Lowongan Tersedia: <span id="totalLowongan">{{ count($lowongans) }}</span></span>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" style="border-radius: 16px" id="filterJurusan" onchange="filterLowongan()">
+                    <option value="">Filter Jurusan</option>
+                    @foreach($jurusans as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4 overflow-scroll" style="height: 90vh;" id="lowonganList">
+        @foreach ($lowongans as $lowongan)
+            <div class="card shadow p-3 mb-3 card-lowongan" data-jurusan="{{ $lowongan->jurusan_id }}" onclick="showDetail({{ $lowongan->id }}, this)">
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('images/' . $lowongan->mitra->gambar) }}" style="width: 50px; height: 50px; object-fit: cover;" alt="Mitra Image">
+                    <div class="ms-3">
+                        <h5 class="fw-semibold mb-1">{{ $lowongan->mitra->nama }}</h5>
+                        <span>{{ $lowongan->mitra->alamat }}</span>
                     </div>
                 </div>
-            @endforeach
-        </div>
-        <div class="col-md-8 mb-4" style="position: fixed; right: 0; top:10">
-            <!-- Detail lowongan akan ditampilkan di sini -->
-            <div id="detailLowongan">
-                <div class="card " style="height: 70vh">
-                    <div class="text-center my-auto">
-                        klik
-                    </div>
+                <div class="card-body p-0 mt-2">
+                    <h6 class="card-title fw-semibold">{{ $lowongan->judul }}</h6>
+                    <p class="card-text mb-1">Posisi: {{ $lowongan->posisi }}</p>
+                    <small class="text-muted">Posted {{ $lowongan->created_at->diffForHumans() }}</small>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    <div class="col-md-8 mb-4" style="height: 90vh; overflow-y: auto;">
+        <div id="detailLowongan">
+            <div class="card detail-card">
+                <div class="text-center">
+                    Klik salah satu lowongan untuk melihat detail.
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        function showDetail(lowonganId) {
-            $.ajax({
-                url: "{{ route('lowongan.detail', '') }}/" + lowonganId,
-                method: 'GET',
-                success: function(response) {
-                    var detailHtml = `
-                        <div class="card border-0 shadow p-3 " style="height:70vh">
-                            
-    <h2 class="text-center fw-semibold mt-3 ">
-        SEMUA LOWONGAN
-    </h2>
-                            <div class="card-body">
-                                <h4 class="card-title fw-semibold">${response.judul}</h4>
-                                <p class="card-text m-0">Posisi: ${response.posisi}</p>
-                                <p class="card-text m-0">Batas Waktu: ${response.batas_waktu}</p>
-                                <p class="card-text m-0">Persyaratan: ${response.persyaratan}</p>
-                                <p class="card-text m-0">Jurusan: ${response.jurusan.nama}</p>
-                                <p class="card-text m-0">Kota: ${response.mitra.kota}</p>
+<script>
+    function showDetail(lowonganId, element) {
+        document.querySelectorAll('.card-lowongan').forEach(card => {
+            card.classList.remove('active');
+        });
+
+        element.classList.add('active');
+        $.ajax({
+            url: "{{ route('lowongan.detail', '') }}/" + lowonganId,
+            method: 'GET',
+            success: function(response) {
+                var mitraImageUrl = `{{ asset('images/${response.mitra.gambar}') }}`;
+                var detailHtml = `
+                    <div class="card detail-card">
+                        <div class="card-body">
+                            <div class="info">
+                                <img src="${mitraImageUrl}" style="width: 50px; height: 50px; object-fit: cover;" alt="Mitra Image">
+                                <div class="ms-3">
+                                    <h5 class="fw-semibold mb-1">${response.mitra.nama}</h5>
+                                    <span>${response.mitra.alamat}</span>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <i class="bi bi-person-fill info-icon"></i>
+                                <div class="info-text"><strong>Posisi:</strong> ${response.posisi}</div>
+                            </div>
+                            <div class="info">
+                                <i class="bi bi-calendar-fill info-icon"></i>
+                                <div class="info-text"><strong>Batas Waktu:</strong>  ${formatTanggal(response.batas_waktu)}</div>
+                            </div>
+                            <div class="info">
+                                <i class="bi bi-file-earmark-text-fill info-icon"></i>
+                                <div class="info-text"><strong>Persyaratan:</strong> ${response.persyaratan}</div>
+                            </div>
+                            <div class="info">
+                                <i class="bi bi-mortarboard-fill info-icon"></i>
+                                <div class="info-text"><strong>Jurusan:</strong> ${response.jurusan.nama}</div>
+                            </div>
+                            <div class="info">
+                                <i class="bi bi-geo-alt-fill info-icon"></i>
+                                <div class="info-text"><strong>Kota:</strong> ${response.mitra.kota}</div>
+                            </div>
+                            <div class=" my-3">
+                                <form method="POST" action="{{ route('lowongan.lamar', $lowongan->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary px-3">Lamar</button>
+                                </form>
+                            </div>
+                            <div>
+                                <h5>Persyaratan Pekerjaan</h5> 
+                                <ul>
+                                    <li>Persyaratan 1</li>
+                                    <li>Persyaratan 2</li>
+                                    <!-- Tambahkan persyaratan pekerjaan di sini -->
+                                </ul>  
                             </div>
                         </div>
-                    `;
-                    $('#detailLowongan').html(detailHtml);
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-    </script>
+                    </div>
+                `;
+                $('#detailLowongan').html(detailHtml);
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    function formatTanggal(tanggal) {
+        var namaBulan = [
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        ];
+
+        var tanggalObj = new Date(tanggal);
+        var bulan = namaBulan[tanggalObj.getMonth()];
+        var tahun = tanggalObj.getFullYear();
+        var tanggalFormatted = tanggalObj.getDate() + " " + bulan + " " + tahun;
+
+        return tanggalFormatted;
+    }
+
+    function filterLowongan() {
+        var selectedJurusan = document.getElementById('filterJurusan').value;
+        var totalLowongan = 0;
+
+        document.querySelectorAll('.card-lowongan').forEach(card => {
+            if (selectedJurusan === "" || card.getAttribute('data-jurusan') === selectedJurusan) {
+                card.style.display = 'block';
+                totalLowongan++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        document.getElementById('totalLowongan').innerText = totalLowongan;
+    }
+</script>
 @endsection

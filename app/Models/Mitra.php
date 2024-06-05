@@ -16,4 +16,10 @@ class Mitra extends Model
         'kota',
     ];
 
+    public function lowongan()
+    {
+        return $this->hasMany(Lowongan::class);
+    }
+    
+
 }

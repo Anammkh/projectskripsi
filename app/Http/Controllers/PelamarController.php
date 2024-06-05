@@ -15,4 +15,10 @@ class PelamarController extends Controller
         return view('Admin.pelamar', compact('pelamars'));
     }
 
+    public function show($id)
+    {
+        $pelamar = Pelamar::findOrFail($id);
+        return view('admin.profilPelamar', compact('pelamar'));
+    }
+
 }

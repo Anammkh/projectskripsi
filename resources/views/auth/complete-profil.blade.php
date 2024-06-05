@@ -152,7 +152,6 @@
                     });
                 });
 
-            // Tampilkan grup form kabupaten
             const regencyFormGroup = document.getElementById('regencyFormGroup');
             regencyFormGroup.style.display = 'block';
         }

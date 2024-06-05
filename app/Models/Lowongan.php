@@ -31,7 +31,7 @@ class Lowongan extends Model
 
     public function skil()
     {
-        return $this->belongsToMany(Skil::class);
+        return $this->belongsTo(Skil::class);
     }
 }
 

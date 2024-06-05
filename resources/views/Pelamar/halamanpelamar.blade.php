@@ -13,6 +13,10 @@
     <!-- App favicon -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 
     <!-- plugins -->
     <link href="{{ asset('assets') }}/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
@@ -26,12 +30,18 @@
         id="bs-dark-stylesheet" disabled />
     <link href="{{ asset('assets') }}/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet"
         disabled />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- icons -->
     <link href="{{ asset('assets') }}/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 </head>
+<style>
+    body {
+            font-family: 'Poppins', sans-serif;
+        }
+</style>
 
 <body class="loading" data-layout-mode="horizontal"
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
@@ -54,6 +64,8 @@
                         </div>
                     </li>
 
+                    @auth
+                    
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
@@ -141,14 +153,16 @@
 
                         </div>
                     </li>
-
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="{{ asset('assets') }}/images/users/avatar-1.jpg" alt="user-image"
                                 class="rounded-circle">
                             <span class="pro-user-name ms-1">
-                                {{ Auth::user()->name }}<i class="uil uil-angle-down"></i>
+                             
+                              {{ Auth::user()->name }}<i class="uil uil-angle-down"></i>
+                             
+
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -181,6 +195,7 @@
                             </form>
                         </div>
                     </li>
+                    @endauth
 
 
                 </ul>
@@ -239,40 +254,41 @@
                 <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
                     <div class="collapse navbar-collapse justify-content-center" id="topnav-menu-content">
                         <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link arrow-none" href="/" id="topnav-components" role="button"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    
+                                    <i data-feather="home"></i> 
+                                   Home<div></div>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-layout"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <i data-feather="home"></i> Lowongan <div class="arrow-down"></div>
+                                    <i data-feather="briefcase"></i>Lowongan <div class="arrow-down"></div>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="topnav-layout">
                                     <a href="/semualowongan" class="dropdown-item">Semua Lowongan</a>
-                                    <a href="dashboard-analytics.html" class="dropdown-item">Rekomendasi</a>
+                                    @auth
+                                    <a href="{{route('lowongan.rekomendasi')}}" class="dropdown-item">Rekomendasi</a>
+                                    @endauth
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('lamaran.status') }}" id="topnav-apps"
-                                    role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i data-feather="layers"></i> Status Pendaftaran <div></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link arrow-none" href="#" id="topnav-components" role="button"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i data-feather="briefcase"></i>Dokumen<div></div>
-                                </a>
-                            </li>
+                           @auth
+                           <li class="nav-item">
+                            <a class="nav-link" href="{{ route('lamaran.status') }}" id="topnav-apps"
+                                role="button" aria-haspopup="true" aria-expanded="false">
+                                <i data-feather="layers"></i> Status Pendaftaran <div></div>
+                            </a>
+                        </li>
+                           @endauth
+                           
                         </ul>
                     </div>
                 </nav>
             </div>
         </div>
-        <!-- end topnav-->
-
-        <!-- ============================================================== -->
-        <!-- Start Page Content here -->
-        <!-- ============================================================== -->
-
         <div class="content-page">
             <div class="content">
 
@@ -283,44 +299,10 @@
                     @yield('content')
                 </div> <!-- container -->
 
-            </div> <!-- co
-
-                <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> &copy; Shreyu theme by <a href="#">Coderthemes</a>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-end footer-links d-none d-sm-block">
-                                <a href="javascript:void(0);">About Us</a>
-                                <a href="javascript:void(0);">Help</a>
-                                <a href="javascript:void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
-
+            </div> 
         </div>
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
-
-
     </div>
-    <!-- END wrapper -->
-
-    <!-- /Right-bar -->
-
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
-
     <!-- Vendor js -->
     <script src="{{ asset('assets') }}/js/vendor.min.js"></script>
 
@@ -329,6 +311,44 @@
     <script src="{{ asset('assets') }}/libs/apexcharts/apexcharts.min.js"></script>
     <script src="{{ asset('assets') }}/libs/flatpickr/flatpickr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if ($errors->any())
+    <script>
+        let errorMessages = '';
+        @foreach ($errors->all() as $error)
+            errorMessages += "{{ $error }}\n";
+        @endforeach
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMessages,
+        });
+    </script>
+@endif
+@if (session('success') || session('error'))
+    <script>
+        $(document).ready(function() {
+            var successMessage = "{{ session('success') }}";
+            var errorMessage = "{{ session('error') }}";
+
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: successMessage,
+                });
+            }
+
+            if (errorMessage) {
+                Swal.fire({
+                    icon: 'error',
+                    text: errorMessage,
+                });
+            }
+        });
+    </script>
+@endif
 
     <!-- Inisialisasi Select2 -->
     <script>
@@ -341,6 +361,7 @@
 
     <!-- App js -->
     <script src="{{ asset('assets') }}/js/app.min.js"></script>
+    
 
     @yield('scripts')
 

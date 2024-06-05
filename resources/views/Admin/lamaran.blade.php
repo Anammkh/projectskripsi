@@ -33,14 +33,36 @@
                             <td>
                                 @if ($lamaran->status == 'Menunggu')
                                 <div class="d-flex">
-                                    <form action="{{ route('lamarans.accept', $lamaran->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success mr-2">Terima</button>
-                                    </form>
+                                    <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#wawancaraModal{{ $lamaran->id }}">Terima</button>
+                                    <div class="modal fade" id="wawancaraModal{{ $lamaran->id }}" tabindex="-1" role="dialog" aria-labelledby="wawancaraModalLabel{{ $lamaran->id }}" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="wawancaraModalLabel{{ $lamaran->id }}">Konfirmasi Lamaran</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('lamarans.accept', $lamaran->id) }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <label for="tanggal_wawancara">Tanggal Wawancara:</label>
+                                                        <input type="date" class="form-control" id="tanggal_wawancara" name="tanggal_wawancara" required>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success">Terima</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <form action="{{ route('lamarans.reject', $lamaran->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Tolak</button>
                                     </form>
+                                    <!-- Tombol untuk melihat profil pelamar -->
+                                    <a href="{{ route('pelamar.show', $lamaran->pelamar->id) }}" class="btn btn-info ml-2">Lihat Profil</a>
                                 </div>
                                 @else
                                     <span class="badge {{ $lamaran->status == 'Diterima' ? 'badge-success' : 'badge-danger' }}">{{ $lamaran->status }}</span>
