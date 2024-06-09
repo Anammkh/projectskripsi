@@ -14,7 +14,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/complete-profile'; // Redirect ke halaman melengkapi profil
+    protected $redirectTo = '/'; 
 
     public function __construct()
     {

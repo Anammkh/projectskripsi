@@ -53,5 +53,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('lowongan/{lowongan}/lamar', [LamaranController::class, 'lamar'])->name('lowongan.lamar');
     Route::get('/status', [LamaranController::class, 'statusPendaftaran'])->name('lamaran.status');
     Route::get('/complete-profile', [UserController::class, 'showCompleteProfileForm'])->name('complete-profile-form');
-    Route::post('/complete-profile', [UserController::class, 'completeProfile'])->name('complete-profile');
+    Route::post('/complete-profile/add', [UserController::class, 'completeProfile'])->name('complete-profile');
 });
