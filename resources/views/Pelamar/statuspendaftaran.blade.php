@@ -116,20 +116,21 @@
                 </div>
             </div>
             @endforeach
-        @else
-            <p class="text-muted">No job applications available.</p>
-        @endif
-       
-    </div>
-    <div class="col-md-8 mb-4  " style="height: 90vh; overflow-y: auto;">
-        <div id="detailLowongan">
-            <div class="card detail-card">
-                <div class="text-center">
-                    Klik salah satu lowongan untuk melihat detail.
+            </div>
+            <div class="col-md-8 mb-4  " style="height: 90vh; overflow-y: auto;">
+                <div id="detailLowongan">
+                    <div class="card detail-card">
+                        <div class="text-center">
+                            Klik salah satu lowongan untuk melihat detail.
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @else
+            <p class="text-muted text-center">Anda belum melamar apapun</p>
+        @endif
+       
+    
 </div>
 
 <script>

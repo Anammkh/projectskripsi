@@ -64,6 +64,7 @@
 
 <div class="row">
     <div class="col-md-4 mb-4 overflow-scroll" style="height: 90vh;" id="lowonganList">
+        @if(count($lowongans) > 0)
         @foreach ($lowongans as $lowongan)
             <div class="card shadow p-3 mb-3 card-lowongan" data-jurusan="{{ $lowongan->jurusan_id }}" onclick="showDetail({{ $lowongan->id }}, this)">
                 <div class="d-flex align-items-center">
@@ -80,7 +81,11 @@
                 </div>
             </div>
         @endforeach
+    @else
+        <div class="text-center">Belum ada lowongan</div>
+    @endif
     </div>
+    @if (count($lowongans) > 0)
     <div class="col-md-8 mb-4" style="height: 90vh; overflow-y: auto;">
         <div id="detailLowongan">
             <div class="card detail-card">
@@ -90,8 +95,11 @@
             </div>
         </div>
     </div>
+    @endif
+   
 </div>
 
+@if (count($lowongans) > 0)
 <script>
     function showDetail(lowonganId, element) {
         document.querySelectorAll('.card-lowongan').forEach(card => {
@@ -189,4 +197,5 @@
         document.getElementById('totalLowongan').innerText = totalLowongan;
     }
 </script>
+@endif
 @endsection

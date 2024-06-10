@@ -123,52 +123,61 @@ class LowonganController extends Controller
         $user = Auth::user();
         $pelamar = Pelamar::where('user_id', $user->id)->firstOrFail();
         $jobs = Lowongan::all();
-
-        $jurusans = Jurusan::pluck('nama')->toArray();
-
-        $skills = Skil::pluck('nama')->toArray();
-
-        $lowonganMitra = Lowongan::pluck('mitra_id')->unique()->toArray();
-
-        $kotas = Mitra::whereIn('id', $lowonganMitra)->pluck('kota')->unique()->toArray();
-        
-
-        $pelamarVector = $this->createVector($pelamar, 'pelamar', $jurusans, $skills, $kotas);
-        //    dd($pelamarVector);
-        $similarities = [];
-
-        foreach ($jobs as $job) {
-            $jobVector = $this->createVector($job, 'job', $jurusans, $skills, $kotas);
-
-            $similarity = $this->cosineSimilarity($pelamarVector, $jobVector);
-
-            $similarities[] = [
-                'job' => $job,
-                'similarity' => $similarity
-            ];
+    
+        // Memeriksa apakah data profil pelamar lengkap
+        if (!$this->isProfileComplete($pelamar)) {
+            $recommendations = -2;
+            return view('recommendations', compact('recommendations'));
         }
-
-       
-        $filteredSimilarities = array_filter($similarities, function ($item) {
-            return $item['similarity'] > 0.5;
-        });
-
-        // Urutkan berdasarkan similarity
-        usort($filteredSimilarities, function ($a, $b) {
-            return $b['similarity'] <=> $a['similarity'];
-        });
-
-        $recommendations = $filteredSimilarities;
-
-
-
+    
+        if($jobs->count() > 1){
+            $jurusans = Jurusan::pluck('nama')->toArray();
+            $skills = Skil::pluck('nama')->toArray();
+            $lowonganMitra = Lowongan::pluck('mitra_id')->unique()->toArray();
+            $kotas = Mitra::whereIn('id', $lowonganMitra)->pluck('kota')->unique()->toArray();
+            
+            $pelamarVector = $this->createVector($pelamar, 'pelamar', $jurusans, $skills, $kotas);
+            $similarities = [];
+    
+            foreach ($jobs as $job) {
+                $jobVector = $this->createVector($job, 'job', $jurusans, $skills, $kotas);
+                $similarity = $this->cosineSimilarity($pelamarVector, $jobVector);
+    
+                $similarities[] = [
+                    'job' => $job,
+                    'similarity' => $similarity
+                ];
+            }
+    
+            $filteredSimilarities = array_filter($similarities, function ($item) {
+                return $item['similarity'] > 0.5;
+            });
+    
+            // Urutkan berdasarkan similarity
+            usort($filteredSimilarities, function ($a, $b) {
+                return $b['similarity'] <=> $a['similarity'];
+            });
+    
+            $recommendations = $filteredSimilarities;
+    
+            return view('recommendations', compact('recommendations'));
+        }
+    
+        $recommendations = -1;
         return view('recommendations', compact('recommendations'));
+    }
+    
+    // Fungsi untuk memeriksa kelengkapan profil pelamar
+    private function isProfileComplete($pelamar)
+    {
+        return !empty($pelamar->kota) && !empty($pelamar->skil_id) && !empty($pelamar->jurusan_id);
     }
 
     private function createVector($entity, $type, $jurusans, $skills, $kotas)
     {
         $vector = array_fill(0, count($jurusans) + count($skills) + count($kotas), 0);
 
+        
         $jurusanIndex = array_search($entity->jurusan->nama, $jurusans);
         $skillIndex = array_search($entity->skil->nama, $skills);
         $kotaIndex = array_search($entity->kota, $kotas);

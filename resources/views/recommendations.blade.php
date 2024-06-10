@@ -3,15 +3,14 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4 mt-3 text-center fw-semibold">Rekomendasi Lowongan Pekerjaan</h1>
-    @if(count($recommendations) > 0)
+    @if($recommendations > 0)
         <div class="row">
             @foreach($recommendations as $recommendation)
                 <div class="col-md-4 mb-4">
                     <div class="card p-1 shadow" style="border-radius:16px;">
                         <div class="d-flex align-items-center justify-content-evenly">
                             <img src="{{ asset('images/' . $recommendation['job']->mitra->gambar) }}"
-     style="border-radius: 8px; height: 100px; width: 100%; object-fit: cover;" alt="Mitra Image">
-                
+                                style="border-radius: 8px; height: 100px; width: 100%; object-fit: cover;" alt="Mitra Image">           
                         </div>
                         <div class="card-body">
                             <h4 class="fw-semibold m-0">{{ $recommendation['job']->mitra->nama }}</h4>
@@ -59,7 +58,12 @@
             @endforeach
         </div>
     @else
-        <p>Tidak ada rekomendasi lowongan pekerjaan yang cocok.</p>
+        @if ($recommendations == -1)
+        <p class="text-center">Tidak ada rekomendasi lowongan pekerjaan yang cocok.</p>
+        @else 
+        
+        <p class="text-center">Silahkan isi profil anda terlebih dahulu!</p>
+        @endif
     @endif
 </div>
 @endsection
