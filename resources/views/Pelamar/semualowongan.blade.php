@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-2">
                 <select class="form-select" style="border-radius: 16px" id="filterJurusan" onchange="filterLowongan()">
-                    <option value="">Filter Jurusan</option>
+                    <option value="">Semua Jurusan</option>
                     @foreach($jurusans as $item)
                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
                     @endforeach
@@ -81,8 +81,9 @@
                 </div>
             </div>
         @endforeach
+        <div id="noDataMessage" class="text-center" style="display: none;">Belum ada data</div>
     @else
-        <div class="text-center">Belum ada lowongan</div>
+        <div class="text-center">Belum ada data</div>
     @endif
     </div>
     @if (count($lowongans) > 0)
@@ -94,14 +95,14 @@
                 </div>
             </div>
         </div>
-    </div>
     @endif
-   
+    </div>
 </div>
 
 @if (count($lowongans) > 0)
 <script>
     function showDetail(lowonganId, element) {
+        console.log(lowonganId);
         document.querySelectorAll('.card-lowongan').forEach(card => {
             card.classList.remove('active');
         });
@@ -143,7 +144,7 @@
                                 <div class="info-text"><strong>Kota:</strong> ${response.mitra.kota}</div>
                             </div>
                             <div class=" my-3">
-                                <form method="POST" action="{{ route('lowongan.lamar', $lowongan->id) }}">
+                                <form method="POST" action="{{ url('lowongan/lamar') }}/${response.id}">
                                     @csrf
                                     <button type="submit" class="btn btn-primary px-3">Lamar</button>
                                 </form>
@@ -195,6 +196,13 @@
         });
 
         document.getElementById('totalLowongan').innerText = totalLowongan;
+
+        var noDataMessage = document.getElementById('noDataMessage');
+        if (totalLowongan === 0) {
+            noDataMessage.style.display = 'block';
+        } else {
+            noDataMessage.style.display = 'none';
+        }
     }
 </script>
 @endif

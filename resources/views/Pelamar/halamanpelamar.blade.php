@@ -64,7 +64,14 @@
                         </div>
                     </li>
 
-                    @auth
+                    @guest
+                    <!-- Jika pengguna belum login -->
+                    <li>
+                        <a href="{{ route('login') }}" class="nav-link">
+                            <i data-feather="log-in"></i> Login
+                        </a>
+                    </li>
+                    @else
                     
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#"
@@ -196,8 +203,7 @@
                         </div>
                     </li>
                     @endauth
-
-
+                    
                 </ul>
 
                 <!-- LOGO -->
