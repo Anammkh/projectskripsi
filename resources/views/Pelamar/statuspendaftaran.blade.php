@@ -64,73 +64,79 @@
         flex-grow: 1;
     }
 </style>
-<div class="row ">
-    <div class="col-md-4 text-center">
-        <ul class="nav nav-tabs mt-3 mb-2" style="cursor: pointer">
-            <li class="nav-item">
-                <a class="nav-link active" data-status="all" onclick="filterLamaran('all')">All</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-status="pending" onclick="filterLamaran('pending')">Pending</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-status="diterima" onclick="filterLamaran('diterima')">Diterima</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-status="ditolak" onclick="filterLamaran('ditolak')">Ditolak</a>
-            </li>
-        </ul>
-        {{-- <div class="w-full">
-
-            <button class="btn btn-primary  w-100 py-2" style="border-radius: 16px">Filter</button>
-        </div> --}}
+<div class="content-page">
+    <div class="content">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-4 text-center">
+                    <ul class="nav nav-tabs mt-3 mb-2" style="cursor: pointer">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-status="all" onclick="filterLamaran('all')">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-status="pending" onclick="filterLamaran('pending')">Pending</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-status="diterima" onclick="filterLamaran('diterima')">Diterima</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-status="ditolak" onclick="filterLamaran('ditolak')">Ditolak</a>
+                        </li>
+                    </ul>
+                    {{-- <div class="w-full">
+            
+                        <button class="btn btn-primary  w-100 py-2" style="border-radius: 16px">Filter</button>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-4 overflow-scroll" style="height: 90vh;">
+                    
+                    @if (count($lamarans) > 0)
+                        @foreach ($lamarans as $lamaran)
+                        <div class="card mb-3 lamaran-card"data-status="{{ strtolower($lamaran->status) }}" onclick="showDetail({{ $lamaran->lowongan->id }}, this)">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="lamaran-status badge badge-{{ strtolower($lamaran->status) }}">{{ $lamaran->status }}</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('images/' . $lamaran->lowongan->mitra->gambar) }}" alt="Perusahaan" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                                    <div class="ms-3">
+                                        <h6 class="fw-semibold mb-1">{{ $lamaran->lowongan->mitra->nama }}</h6>
+                                        <span>{{ $lamaran->lowongan->mitra->alamat }}</span>
+                                    </div>
+                                </div>
+                                <p class="mt-1 mb-0">Posisi: {{ $lamaran->lowongan->posisi }}</p>
+                                <small class="text-muted">Posted {{ $lamaran->lowongan->created_at->diffForHumans() }}</small>
+                                @if ($lamaran->status == 'Diterima')
+                                <div class="mt-3">
+                                    <strong>Tanggal Wawancara:</strong> {{ $lamaran->tanggal_wawancara }}
+                                </div>
+                                <div class="m-0">
+                                    <small class="text-danger">*Silakan datang ke SMK  untuk sesi wawancara.</small>
+                                </div>
+                            @endif
+                            </div>
+                        </div>
+                        @endforeach
+                        </div>
+                        <div class="col-md-8 mb-4  " style="height: 90vh; overflow-y: auto;">
+                            <div id="detailLowongan">
+                                <div class="card detail-card">
+                                    <div class="text-center">
+                                        Klik salah satu lowongan untuk melihat detail.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <p class="text-muted text-center">Anda belum melamar apapun</p>
+                    @endif
+                   
+                
+            </div>
+        </div>
     </div>
-</div>
-<div class="row ">
-    <div class="col-md-4 overflow-scroll" style="height: 90vh;">
-        
-        @if (count($lamarans) > 0)
-            @foreach ($lamarans as $lamaran)
-            <div class="card mb-3 lamaran-card"data-status="{{ strtolower($lamaran->status) }}" onclick="showDetail({{ $lamaran->lowongan->id }}, this)">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="lamaran-status badge badge-{{ strtolower($lamaran->status) }}">{{ $lamaran->status }}</div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <img src="{{ asset('images/' . $lamaran->lowongan->mitra->gambar) }}" alt="Perusahaan" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
-                        <div class="ms-3">
-                            <h6 class="fw-semibold mb-1">{{ $lamaran->lowongan->mitra->nama }}</h6>
-                            <span>{{ $lamaran->lowongan->mitra->alamat }}</span>
-                        </div>
-                    </div>
-                    <p class="mt-1 mb-0">Posisi: {{ $lamaran->lowongan->posisi }}</p>
-                    <small class="text-muted">Posted {{ $lamaran->lowongan->created_at->diffForHumans() }}</small>
-                    @if ($lamaran->status == 'Diterima')
-                    <div class="mt-3">
-                        <strong>Tanggal Wawancara:</strong> {{ $lamaran->tanggal_wawancara }}
-                    </div>
-                    <div class="m-0">
-                        <small class="text-danger">*Silakan datang ke SMK  untuk sesi wawancara.</small>
-                    </div>
-                @endif
-                </div>
-            </div>
-            @endforeach
-            </div>
-            <div class="col-md-8 mb-4  " style="height: 90vh; overflow-y: auto;">
-                <div id="detailLowongan">
-                    <div class="card detail-card">
-                        <div class="text-center">
-                            Klik salah satu lowongan untuk melihat detail.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @else
-            <p class="text-muted text-center">Anda belum melamar apapun</p>
-        @endif
-       
-    
 </div>
 
 <script>

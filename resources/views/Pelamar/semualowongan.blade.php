@@ -44,59 +44,64 @@
     }
 </style>
 
-<div class="row mt-3 mb-2">
-    <div class="col-md-12">
-        <div class="row mb-2 align-items-center ">
-            <div class="col-md-2 text-start">
-                <span class="fw-semibold">Lowongan Tersedia: <span id="totalLowongan">{{ count($lowongans) }}</span></span>
-            </div>
-            <div class="col-md-2">
-                <select class="form-select" style="border-radius: 16px" id="filterJurusan" onchange="filterLowongan()">
-                    <option value="">Semua Jurusan</option>
-                    @foreach($jurusans as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                    @endforeach
-                </select>
+<div class="content-page">
+        
+<div class="container">
+    <div class="row mt-3 mb-2">
+        <div class="col-md-12">
+            <div class="row mb-2 align-items-center ">
+                <div class="col-md-2 text-start">
+                    <span class="fw-semibold">Lowongan Tersedia: <span id="totalLowongan">{{ count($lowongans) }}</span></span>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" style="border-radius: 16px" id="filterJurusan" onchange="filterLowongan()">
+                        <option value="">Semua Jurusan</option>
+                        @foreach($jurusans as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4 mb-4 overflow-scroll" style="height: 90vh;" id="lowonganList">
-        @if(count($lowongans) > 0)
-        @foreach ($lowongans as $lowongan)
-            <div class="card shadow p-3 mb-3 card-lowongan" data-jurusan="{{ $lowongan->jurusan_id }}" onclick="showDetail({{ $lowongan->id }}, this)">
-                <div class="d-flex align-items-center">
-                    <img src="{{ asset('images/' . $lowongan->mitra->gambar) }}" style="width: 50px; height: 50px; object-fit: cover;" alt="Mitra Image">
-                    <div class="ms-3">
-                        <h5 class="fw-semibold mb-1">{{ $lowongan->mitra->nama }}</h5>
-                        <span>{{ $lowongan->mitra->alamat }}</span>
+    
+    <div class="row">
+        <div class="col-md-4 mb-4 overflow-scroll" style="height: 90vh;" id="lowonganList">
+            @if(count($lowongans) > 0)
+            @foreach ($lowongans as $lowongan)
+                <div class="card shadow p-3 mb-3 card-lowongan" data-jurusan="{{ $lowongan->jurusan_id }}" onclick="showDetail({{ $lowongan->id }}, this)">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ asset('images/' . $lowongan->mitra->gambar) }}" style="width: 50px; height: 50px; object-fit: cover;" alt="Mitra Image">
+                        <div class="ms-3">
+                            <h5 class="fw-semibold mb-1">{{ $lowongan->mitra->nama }}</h5>
+                            <span>{{ $lowongan->mitra->alamat }}</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0 mt-2">
+                        <h6 class="card-title fw-semibold">{{ $lowongan->judul }}</h6>
+                        <p class="card-text mb-1">Posisi: {{ $lowongan->posisi }}</p>
+                        <small class="text-muted">Posted {{ $lowongan->created_at->diffForHumans() }}</small>
                     </div>
                 </div>
-                <div class="card-body p-0 mt-2">
-                    <h6 class="card-title fw-semibold">{{ $lowongan->judul }}</h6>
-                    <p class="card-text mb-1">Posisi: {{ $lowongan->posisi }}</p>
-                    <small class="text-muted">Posted {{ $lowongan->created_at->diffForHumans() }}</small>
-                </div>
-            </div>
-        @endforeach
-        <div id="noDataMessage" class="text-center" style="display: none;">Belum ada data</div>
-    @else
-        <div class="text-center">Belum ada data</div>
-    @endif
-    </div>
-    @if (count($lowongans) > 0)
-    <div class="col-md-8 mb-4" style="height: 90vh; overflow-y: auto;">
-        <div id="detailLowongan">
-            <div class="card detail-card">
-                <div class="text-center">
-                    Klik salah satu lowongan untuk melihat detail.
-                </div>
-            </div>
+            @endforeach
+            <div id="noDataMessage" class="text-center" style="display: none;">Belum ada data</div>
+        @else
+            <div class="text-center">Belum ada data</div>
+        @endif
         </div>
-    @endif
+        @if (count($lowongans) > 0)
+        <div class="col-md-8 mb-4" style="height: 90vh; overflow-y: auto;">
+            <div id="detailLowongan">
+                <div class="card detail-card">
+                    <div class="text-center">
+                        Klik salah satu lowongan untuk melihat detail.
+                    </div>
+                </div>
+            </div>
+        @endif
+        </div>
     </div>
+</div>    
 </div>
 
 @if (count($lowongans) > 0)

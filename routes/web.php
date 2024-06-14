@@ -9,6 +9,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\SkilController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\PelamarController;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,11 +24,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
+
+Route::get('/', [LandingpageController::class, 'index'])->name('welcome');
 Route::get('/semualowongan', [LowonganController::class, 'indexPelamar'])->name('Pelamar.semualowongan');
 Route::get('lowongan/detail/{id}', [LowonganController::class, 'showDetail'])->name('lowongan.detail');
 

@@ -12,11 +12,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  // Initialize Swiper
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+</script>
     <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
 
     <!-- plugins -->
     <link href="{{ asset('assets') }}/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
@@ -35,13 +51,10 @@
     <!-- icons -->
     <link href="{{ asset('assets') }}/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
+    
+    <link rel="stylesheet" href="{{ asset('./css/landingpage.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
-<style>
-    body {
-            font-family: 'Poppins', sans-serif;
-        }
-</style>
 
 <body class="loading" data-layout-mode="horizontal"
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
@@ -281,6 +294,7 @@
                                     @endauth
                                 </div>
                             </li>
+                          
                            @auth
                            <li class="nav-item">
                             <a class="nav-link" href="{{ route('lamaran.status') }}" id="topnav-apps"
@@ -295,18 +309,10 @@
                 </nav>
             </div>
         </div>
-        <div class="content-page">
-            <div class="content">
 
-                <!-- Start Content-->
-                <div class="container-fluid">
-
-                    <!-- end page title -->
-                    @yield('content')
-                </div> <!-- container -->
-
-            </div> 
-        </div>
+        
+        @yield('content')
+        @yield('footer')
 
     </div>
     <!-- Vendor js -->
@@ -367,6 +373,7 @@
 
     <!-- App js -->
     <script src="{{ asset('assets') }}/js/app.min.js"></script>
+
     
 
     @yield('scripts')
