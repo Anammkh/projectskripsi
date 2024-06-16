@@ -1,6 +1,7 @@
 @extends('Pelamar.halamanpelamar')
 
 @section('content')
+   <div class="content-page">
     <div class="container">
         <h2 class="fw-semibold text-center my-3">Edit Profil {{ $pelamar->user->name }}</h2>
         @if (session('success'))
@@ -135,6 +136,7 @@
             </form>
         </div>
     </div>
+   </div>
 
 
     <script>

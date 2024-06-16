@@ -16,7 +16,8 @@ class Lowongan extends Model
         'persyaratan',
         'jurusan_id',
         'mitra_id',
-        'skil_id'
+        'skil_id',
+        'kota',
     ];
 
     public function jurusan()

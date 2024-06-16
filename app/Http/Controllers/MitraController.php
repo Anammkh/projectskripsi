@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class MitraController extends Controller
 {
@@ -16,9 +15,8 @@ class MitraController extends Controller
 
     public function create()
     {
-        $response = Http::get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
-        $provinces = $response->json();
-        return view('Admin.createmitra', compact('provinces'));
+        
+        return view('Admin.createmitra');
     }
 
     public function store(Request $request)
@@ -43,7 +41,6 @@ class MitraController extends Controller
         'alamat' => $request->alamat,
         'deskripsi' => $request->deskripsi,
         'gambar' => $imageName,
-        'kota' => $request->kota,
     ]);
 
     // Redirect ke halaman daftar pengguna dengan pesan sukses
@@ -90,6 +87,12 @@ class MitraController extends Controller
     
     $mitra->delete();
     return redirect()->route('mitra.index')->with('success', 'mitra deleted successfully.');
+    }
+
+    public function detail($id)
+    {
+        $mitra = Mitra::with('lowongan')->findOrFail($id);
+        return view('Pelamar.mitra.detail', compact('mitra'));
     }
 }
 

@@ -62,6 +62,21 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group mb-2">
+                        <label class="mb-1" for="Provinsi">Provinsi</label>
+                        <select class="form-control select2" id="province"  onchange="getRegencies(this.value)">
+                            <option value="" disabled selected>Pilih Provinsi</option>
+                            @foreach ($provinces as $province)
+                                <option value="{{ $province['id'] }}">{{ $province['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-2" id="regencyFormGroup" style="display: none;">
+                        <label class="mb-1" for="regency">Kabupaten</label>
+                        <select class="form-control select2" id="regency" name="kota">
+                            <option value="" disabled selected>Pilih Kota/Kabupaten</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                     <a href="{{ route('lowongan.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                 </form>
@@ -69,4 +84,25 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 </div>
+
+<script>
+    function getRegencies(provinceId) {
+        fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+            .then(response => response.json())
+            .then(regencies => {
+                const regencySelect = document.getElementById('regency');
+                regencySelect.innerHTML = '<option value="" disabled selected>Pilih Kota/Kabupaten</option>';
+                regencies.forEach(regency => {
+                    const option = document.createElement('option');
+                    option.value = regency.name;
+                    option.text = regency.name;
+                    regencySelect.appendChild(option);
+                });
+            });
+
+        // Tampilkan grup form kabupaten
+        const regencyFormGroup = document.getElementById('regencyFormGroup');
+        regencyFormGroup.style.display = 'block';
+    }
+</script>
 @endsection

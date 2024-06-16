@@ -13,7 +13,6 @@ class Mitra extends Model
         'alamat', 
         'deskripsi', 
         'gambar',
-        'kota',
     ];
 
     public function lowongan()

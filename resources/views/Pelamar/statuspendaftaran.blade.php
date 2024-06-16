@@ -68,7 +68,7 @@
     <div class="content">
         <div class="container">
             <div class="row ">
-                <div class="col-md-4 text-center">
+                <div class="col-md-5 text-center">
                     <ul class="nav nav-tabs mt-3 mb-2" style="cursor: pointer">
                         <li class="nav-item">
                             <a class="nav-link active" data-status="all" onclick="filterLamaran('all')">All</a>
@@ -179,7 +179,7 @@
                             </div>
                             <div class="info">
                                 <i class="bi bi-geo-alt-fill info-icon"></i>
-                                <div class="info-text"><strong>Kota:</strong> ${response.mitra.kota}</div>
+                                <div class="info-text"><strong>Kota:</strong> ${response.kota}</div>
                             </div>
                             <div class=" my-3">
                                

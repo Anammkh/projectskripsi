@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('pelamars', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_kelamin');
-            $table->date('ttl');
-            $table->string('sekolah');
-            $table->text('alamat');
-            $table->integer('tinggi');
-            $table->string('no_hp');
-            $table->unsignedBigInteger('jurusan_id');
+            $table->string('jenis_kelamin')->nullable();
+            $table->date('ttl')->nullable();
+            $table->string('sekolah')->nullable();
+            $table->text('alamat')->nullable();
+            $table->integer('tinggi')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->unsignedBigInteger('jurusan_id')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->string('ktp');
-            $table->string('ijazah');
-            $table->string('transkip_nilai');
-            $table->string('cv');
-            $table->unsignedBigInteger('skil_id');
+            $table->string('ktp')->nullable();
+            $table->string('ijazah')->nullable();
+            $table->string('transkip_nilai')->nullable();
+            $table->string('cv')->nullable();
+            $table->unsignedBigInteger('skil_id')->nullable();
             $table->timestamps();
 
             // Foreign keys

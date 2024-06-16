@@ -79,11 +79,17 @@
 
                     @guest
                     <!-- Jika pengguna belum login -->
-                    <li>
+                    <li class="nav-item">
                         <a href="{{ route('login') }}" class="nav-link">
-                            <i data-feather="log-in"></i> Login
+                            <i class="bi bi-box-arrow-in-right"></i> Login
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link">
+                            <i class="bi bi-person-plus"></i> Register
+                        </a>
+                    </li>
+                    
                     @else
                     
                     <li class="dropdown notification-list topbar-dropdown">
@@ -320,7 +326,6 @@
 
     <!-- optional plugins -->
     <script src="{{ asset('assets') }}/libs/moment/min/moment.min.js"></script>
-    <script src="{{ asset('assets') }}/libs/apexcharts/apexcharts.min.js"></script>
     <script src="{{ asset('assets') }}/libs/flatpickr/flatpickr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -368,8 +373,6 @@
             $('.select2').select2();
         });
     </script>
-    <!-- page js -->
-    <script src="{{ asset('assets') }}/js/pages/dashboard.init.js"></script>
 
     <!-- App js -->
     <script src="{{ asset('assets') }}/js/app.min.js"></script>

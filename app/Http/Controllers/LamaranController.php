@@ -35,7 +35,7 @@ class LamaranController extends Controller
 
     foreach ($requiredFields as $field) {
         if (empty($pelamar->$field)) {
-            return redirect()->route('Pelamar.semualowongan')->with('error', 'Data pelamar belum lengkap. Harap lengkapi data sebelum melamar.');
+            return redirect()->back()->with('error', 'Data pelamar belum lengkap. Harap lengkapi data sebelum melamar.');
         }
     }
 
@@ -48,7 +48,7 @@ class LamaranController extends Controller
         ->first();
 
     if ($existingApplication) {
-        return redirect()->route('Pelamar.semualowongan')->with('error', 'Anda sudah melamar untuk lowongan ini.');
+        return redirect()->back()->with('error', 'Anda sudah melamar untuk lowongan ini.');
     }
 
     // Menyimpan lamaran baru
@@ -62,7 +62,7 @@ class LamaranController extends Controller
         'status' => $status,
     ]);
 
-    return redirect()->route('Pelamar.semualowongan')->with('success', 'Berhasil melamar untuk lowongan ini.');
+    return redirect()->back()->with('success', 'Berhasil melamar untuk lowongan ini.');
 }
 
 

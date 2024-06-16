@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [LandingpageController::class, 'index'])->name('welcome');
 Route::get('/semualowongan', [LowonganController::class, 'indexPelamar'])->name('Pelamar.semualowongan');
 Route::get('lowongan/detail/{id}', [LowonganController::class, 'showDetail'])->name('lowongan.detail');
+Route::get('/mitra/detail/{id}', [MitraController::class, 'detail'])->name('mitra.detail');
 
 Route::resource('lowongan', LowonganController::class);
 
