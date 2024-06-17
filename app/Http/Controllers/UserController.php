@@ -42,23 +42,30 @@ class UserController extends Controller
 {
     $userId = Auth::id();
     $pelamar = Pelamar::firstOrCreate(['user_id' => $userId]);
+    $user = User::find($userId);
 
-    // Menangani upload file
+    if ($request->hasFile('gambar')) {
+        if ($user->gambar) {
+            Storage::delete(public_path($user->gambar));
+        }
+        $gambarPath = $request->file('gambar')->move(public_path('images/profiles'), $request->file('gambar')->getClientOriginalName());
+        $user->gambar = 'images/profiles/' . $request->file('gambar')->getClientOriginalName();
+    }
+
+    // Menangani upload file lainnya
     $fileFields = ['cv', 'ktp', 'transkip_nilai', 'ijazah'];
     foreach ($fileFields as $field) {
         if ($request->hasFile($field)) {
-            // Hapus file lama jika ada
             if ($pelamar->$field) {
-                // Hapus file lama
-                Storage::delete($pelamar->$field);
+                Storage::delete(public_path($pelamar->$field));
             }
-            // Pindahkan file baru
             $path = $request->file($field)->move(public_path('documents'), $request->file($field)->getClientOriginalName());
-            $pelamar->$field = '/documents/' . $request->file($field)->getClientOriginalName();
+            $pelamar->$field = 'documents/' . $request->file($field)->getClientOriginalName();
         }
     }
+    $user->name = $request->input('name');
+    $user->save();
 
-    // Update data pelamar
     $pelamar->fill($request->except($fileFields));
     $pelamar->save();
 

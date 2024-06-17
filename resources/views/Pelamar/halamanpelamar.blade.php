@@ -182,7 +182,7 @@
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{ asset('assets') }}/images/users/avatar-1.jpg" alt="user-image"
+                            <img src="{{ asset(Auth::user()->gambar) }}" alt="user-image"
                                 class="rounded-circle">
                             <span class="pro-user-name ms-1">
                              
@@ -201,13 +201,11 @@
                                 <i data-feather="user" class="icon-dual icon-xs me-1"></i><span>My Profile</span>
                             </a>
 
-                            <a href="pages-profile.html" class="dropdown-item notify-item">
+                            <a href="{{ route('edit-password') }}" class="dropdown-item notify-item">
                                 <i data-feather="user" class="icon-dual icon-xs me-1"></i><span>My Account</span>
                             </a>
 
-                            <a href="pages-lock-screen.html" class="dropdown-item notify-item">
-                                <i data-feather="lock" class="icon-dual icon-xs me-1"></i><span>Lock Screen</span>
-                            </a>
+                
                             <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item" href="{{ route('logout') }}"

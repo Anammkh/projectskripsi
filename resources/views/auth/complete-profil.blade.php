@@ -3,7 +3,7 @@
 @section('content')
    <div class="content-page">
     <div class="container">
-        <h2 class="fw-semibold text-center my-3">Edit Profil {{ $pelamar->user->name }}</h2>
+        <h2 class="fw-semibold text-center my-4">Edit Profil {{ $pelamar->user->name }}</h2>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -15,6 +15,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-2">
+                            <label class="mb-1" for="gambar">Gambar Profil</label>
+                            <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" onchange="previewImage(event)">
+                            <img id="preview" src="{{ $pelamar->user->gambar ? asset($pelamar->user->gambar) : '' }}"  style="max-width: 100px; margin-top: 10px;">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="mb-1" for="name">nama</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ $pelamar->user->name }}">
+                        </div>
+                        <div class="form-group mb-2">
                             <label class="mb-1" for="jenis_kelamin">Jenis Kelamin</label>
                             <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
                                 <option value="" disabled>Pilih Jenis Kelamin</option>
@@ -24,6 +34,7 @@
                                     Perempuan</option>
                             </select>
                         </div>
+                       
                         <div class="form-group mb-2">
                             <label class="mb-1" for="sekolah">Sekolah</label>
                             <input type="text" class="form-control" id="sekolah" name="sekolah"
@@ -46,6 +57,10 @@
                             <input type="date" class="form-control" id="ttl" name="ttl"
                                 value="{{ $pelamar->ttl }}">
                         </div>
+                        
+                    </div>
+
+                    <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label class="mb-1" for="no_hp">No HP</label>
                             <input type="text" class="form-control" id="no_hp" name="no_hp"
@@ -63,9 +78,6 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-
-                    <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label class="mb-1" for="jurusan_id">Jurusan</label>
                             <select class="form-control" id="jurusan_id" name="jurusan_id" required>
@@ -110,6 +122,9 @@
                                 <a href="{{ asset($pelamar->ijazah) }}" target="_blank">Lihat Ijazah</a>
                             @endif
                         </div>
+
+                        
+
                         <div class="form-group mb-2">
                             <label class="mb-1" for="Provinsi">Provinsi</label>
                             <select class="form-control select2" id="province" onchange="getRegencies(this.value)">
@@ -120,8 +135,6 @@
                             </select>
                         </div>
 
-
-
                         <div class="form-group mb-2" id="regencyFormGroup" style="display: none;">
                             <label class="mb-1" for="regency">Kabupaten</label>
                             <select class="form-control select2" id="regency" name="kota">
@@ -129,17 +142,24 @@
                             </select>
                         </div>
 
-
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary float-end mt-3">Simpan</button>
             </form>
         </div>
     </div>
    </div>
 
-
     <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
         function getRegencies(provinceId) {
             fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
                 .then(response => response.json())

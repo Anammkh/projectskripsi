@@ -55,4 +55,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/status', [LamaranController::class, 'statusPendaftaran'])->name('lamaran.status');
     Route::get('/complete-profile', [UserController::class, 'showCompleteProfileForm'])->name('complete-profile-form');
     Route::post('/complete-profile/add', [UserController::class, 'completeProfile'])->name('complete-profile');
+    Route::get('/editPassword', [LandingpageController::class, 'editPassword'])->name('edit-password');
+    Route::put('/updatePassword/{id}', [LandingpageController::class, 'updatePassword'])->name('update-password');
 });
