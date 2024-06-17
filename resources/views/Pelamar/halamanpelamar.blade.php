@@ -182,8 +182,8 @@
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{ asset(Auth::user()->gambar) }}" alt="user-image"
-                                class="rounded-circle">
+                            <img src="{{ Auth::user()->gambar ? asset(Auth::user()->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="user-image" class="rounded-circle">
+
                             <span class="pro-user-name ms-1">
                              
                               {{ Auth::user()->name }}<i class="uil uil-angle-down"></i>

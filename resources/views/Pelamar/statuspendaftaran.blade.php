@@ -68,6 +68,8 @@
     <div class="content">
         <div class="container">
             <div class="row ">
+                
+                @if (count($lamarans) > 0)
                 <div class="col-md-5 text-center">
                     <ul class="nav nav-tabs mt-3 mb-2" style="cursor: pointer">
                         <li class="nav-item">
@@ -92,7 +94,6 @@
             <div class="row ">
                 <div class="col-md-4 overflow-scroll" style="height: 90vh;">
                     
-                    @if (count($lamarans) > 0)
                         @foreach ($lamarans as $lamaran)
                         <div class="card mb-3 lamaran-card"data-status="{{ strtolower($lamaran->status) }}" onclick="showDetail({{ $lamaran->lowongan->id }}, this)">
                             <div class="card-body">
@@ -130,7 +131,7 @@
                             </div>
                         </div>
                     @else
-                        <p class="text-muted text-center">Anda belum melamar apapun</p>
+                        <p class="text-muted text-center my-5 fw-bold">Anda belum melamar apapun</p>
                     @endif
                    
                 

@@ -89,14 +89,19 @@ public function accept(Request $request, $id)
     }
 
     public function statusPendaftaran()
-    {
-        $dataLamaran = Lamaran::with('pelamar', 'lowongan')->get();
-    
-        $lamarans = $dataLamaran->sortByDesc(function ($lamaran) {
-            return $lamaran->status == 'Diterima' ? 1 : 0;
-        });
-    
-        return view('Pelamar.statuspendaftaran', compact('lamarans'));
-    }
+{
+    $userId = Auth::id();
+    $dataLamaran = Lamaran::with('pelamar', 'lowongan')
+                          ->whereHas('pelamar', function ($query) use ($userId) {
+                              $query->where('user_id', $userId);
+                          })
+                          ->get();
+
+    $lamarans = $dataLamaran->sortByDesc(function ($lamaran) {
+        return $lamaran->status == 'Diterima' ? 1 : 0;
+    });
+
+    return view('Pelamar.statuspendaftaran', compact('lamarans'));
+}
     
 }
