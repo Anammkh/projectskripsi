@@ -22,7 +22,6 @@ class Pelamar extends Model
         'ktp',
         'transkip_nilai',
         'ijazah',
-        'skil_id',
         'kota'
     ];
 
@@ -40,8 +39,8 @@ class Pelamar extends Model
 
 
     // Definisikan relasi dengan tabel lain jika diperlukan
-    public function skil()
+    public function skils()
     {
-        return $this->belongsTo(Skil::class);
+        return $this->belongsToMany(Skil::class, 'pelamar_skil');
     }
 }

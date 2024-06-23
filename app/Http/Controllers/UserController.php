@@ -44,15 +44,16 @@ class UserController extends Controller
     $pelamar = Pelamar::firstOrCreate(['user_id' => $userId]);
     $user = User::find($userId);
 
+    // Handle profile image upload
     if ($request->hasFile('gambar')) {
         if ($user->gambar) {
-            Storage::delete(public_path($user->gambar));
+            Storage::delete($user->gambar);
         }
-        $gambarPath = $request->file('gambar')->move(public_path('images/profiles'), $request->file('gambar')->getClientOriginalName());
-        $user->gambar = 'images/profiles/' . $request->file('gambar')->getClientOriginalName();
+        $gambarPath = $request->file('gambar')->store('images/profiles', 'public');
+        $user->gambar = $gambarPath;
     }
 
-    // Menangani upload file lainnya
+    // Handle other file uploads
     $fileFields = ['cv', 'ktp', 'transkip_nilai', 'ijazah'];
     foreach ($fileFields as $field) {
         if ($request->hasFile($field)) {
@@ -63,14 +64,23 @@ class UserController extends Controller
             $pelamar->$field = 'documents/' . $request->file($field)->getClientOriginalName();
         }
     }
+
+    // Update user name
     $user->name = $request->input('name');
     $user->save();
 
-    $pelamar->fill($request->except($fileFields));
+    // Update pelamar details except file fields
+    $pelamar->fill($request->except(array_merge($fileFields, ['skil_id'])));
     $pelamar->save();
+
+    // Update skill relationships
+    if ($request->has('skil_id')) {
+        $pelamar->skils()->sync($request->input('skil_id'));
+    }
 
     return redirect()->route('complete-profile-form')->with('success', 'Profil berhasil diperbarui.');
 }
+
 
 
 

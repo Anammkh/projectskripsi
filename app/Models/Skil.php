@@ -13,6 +13,11 @@ class Skil extends Model
 
     public function lowongans()
     {
-        return $this->belongsToMany(Lowongan::class);
+        return $this->belongsToMany(Lowongan::class, 'lowongan_skil', 'skil_id', 'lowongan_id');
+    }
+
+    public function pelamars()
+    {
+        return $this->belongsToMany(Pelamar::class, 'pelamar_skil');
     }
 }

@@ -33,41 +33,50 @@
             <div class="row mt-2">
                 @foreach ($jobs as $item)
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-lg"
-                            style="border: 1px solid #dddddd; border-radius: 8px; overflow: hidden;">
-                            <div class="card-header d-flex justify-content-between align-items-center"
-                                style="background-color: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #ddd;">
-                                <img src="{{ asset('images/' . $item->mitra->gambar) }}"
-                                    alt="Logo Perusahaan"
-                                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
-                                <span class="badge bg-primary"
-                                    style="font-size: 0.8em; padding: 5px 10px; color: #fff; background-color: #007bff; border-radius: 3px;">{{ strtolower($item->kota) }}</span>
+                        <div class="card mb-4 shadow-lg" style="border: 1px solid #dddddd; border-radius: 8px; overflow: hidden;">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #ddd;">
+                                <img src="{{ asset('images/' . $item->mitra->gambar) }}" alt="Logo Perusahaan" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                                <span class="badge bg-primary" style="font-size: 0.8em; padding: 5px 10px; color: #fff; background-color: #007bff; border-radius: 3px;">
+                                    {{ strtolower($item->kota) }}
+                                </span>
                             </div>
                             <div class="card-body" style="padding: 20px;">
                                 <h5 class="card-title fw-semibold" style="font-size: 1.5em; margin-bottom: 10px;">
-                                    {{ $item->posisi }}</h5>
+                                    {{ $item->posisi }}
+                                </h5>
                                 <h6 class="card-subtitle mb-2 text-muted" style="font-size: 1em; margin-bottom: 10px;">
-                                    {{ $item->mitra->nama }}</h6>
-                                <p class="card-text m-0"><i class="bi bi-briefcase" style="margin-right: 5px;"></i>Jurusan:
-                                    <span class="fw-semibold">{{ $item->jurusan->nama }}</span>
+                                    {{ $item->mitra->nama }}
+                                </h6>
+                                <p class="card-text m-0"><i class="bi bi-book" style="margin-right: 5px;"></i>Jurusan:
+                                    <span class="fw-semibold">
+                                        @foreach($item->jurusans as $jurusan)
+                                            {{ $jurusan->nama }}{{ !$loop->last ? ',' : '' }}
+                                        @endforeach
+                                    </span>
                                 </p>
                                 <p class="card-text m-0"><i class="bi bi-clipboard-check"></i> Skill:
-                                    <span class="fw-semibold">{{ $item->skil->nama }}</span>
+                                    <span class="fw-semibold">
+                                        @foreach($item->skils as $skill)
+                                            {{ $skill->nama }}{{ !$loop->last ? ',' : '' }}
+                                        @endforeach
+                                    </span>
                                 </p>
-                                <p class="card-text m-0"><i class="bi bi-calendar-check"></i> Batas waktu: <span
-                                        class="fw-semibold">{{ \Carbon\Carbon::parse($item->batas_waktu)->format('d F Y') }}
-                                    </span></p>
-                                <p class="card-text mt-2">Deskripsi singkat mengenai pekerjaan yang tersedia. Kualifikasi
-                                    yang dibutuhkan, tanggung jawab, </p>
-                                <p class="card-text"><small class="text-muted">Tanggal Posting:
-                                        {{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</small></p>
-
+                                <p class="card-text m-0"><i class="bi bi-calendar-check"></i> Batas waktu:
+                                    <span class="fw-semibold">{{ \Carbon\Carbon::parse($item->batas_waktu)->format('d F Y') }}</span>
+                                </p>
+                                <p class="card-text mt-2">Persyaratan:
+                                    <ul>
+                                        @foreach($item->persyaratan as $persyaratan)
+                                            <li>{{ $persyaratan }}</li>
+                                        @endforeach
+                                    </ul>
+                                </p>
+                                <p class="card-text"><small class="text-muted">Tanggal Posting: {{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</small></p>
                                 <div class="d-flex gap-2 mt-2">
                                     <div class="w-100">
                                         <form method="POST" action="{{ route('lowongan.lamar', $item->id) }}">
                                             @csrf
-                                            <button type="submit" class="btn btn-primary p-2 w-100 ">Lamar
-                                                Sekarang</button>
+                                            <button type="submit" class="btn btn-primary p-2 w-100">Lamar Sekarang</button>
                                         </form>
                                     </div>
                                 </div>
@@ -76,6 +85,7 @@
                     </div>
                 @endforeach
             </div>
+            
         </div>
     </section>
     {{-- END LOWONGAN TERBARU --}}

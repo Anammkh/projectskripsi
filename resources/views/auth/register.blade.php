@@ -111,6 +111,11 @@
                                         <div class="mb-3 text-center d-grid">
                                             <button class="btn btn-primary" type="submit">Sign Up</button>
                                         </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12 text-center">
+                                                <p class="text-muted">Already have account? <a href="{{ route('login') }}" class="text-primary fw-bold ms-1">Login</a></p>
+                                            </div> <!-- end col -->
+                                        </div> 
                                     </form>
                                 </div>
                                 <div class="col-lg-6 d-none d-lg-inline-block">
@@ -129,11 +134,7 @@
                     </div>
                     <!-- end card -->
 
-                    <div class="row mt-3">
-                        <div class="col-12 text-center">
-                            <p class="text-muted">Already have account? <a href="{{ route('login') }}" class="text-primary fw-bold ms-1">Login</a></p>
-                        </div> <!-- end col -->
-                    </div> <!-- end row -->
+                  <!-- end row -->
 
                 </div> <!-- end col -->
             </div> <!-- end row -->

@@ -17,7 +17,7 @@ class LamaranController extends Controller
         return view('Admin.lamaran', compact('lamarans'));
     }
     public function lamar(Lowongan $lowongan)
-{
+    {
     $userId = Auth::id();
     $pelamar = Pelamar::where('user_id', $userId)->first();
 

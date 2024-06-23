@@ -12,6 +12,6 @@ class Jurusan extends Model
     
     public function lowongans()
     {
-        return $this->belongsToMany(Lowongan::class);
+        return $this->belongsToMany(Lowongan::class, 'lowongan_jurusan', 'jurusan_id', 'lowongan_id');
     }
 }

@@ -8,10 +8,10 @@
             <div class="col-md-6">
                 <table class="table table-borderless">
                     <tbody>
-                        {{-- <tr>
+                        <tr>
                             <td><strong>Foto</strong></td>
                             <td>:<img src="{{ asset('images/'. $pelamar->user->gambar) }}" alt="" width="100"></td>
-                        </tr> --}}
+                        </tr>
                         <tr>
                             <td><strong>Sekolah</strong></td>
                             <td>:{{ $pelamar->sekolah }}</td>
@@ -74,6 +74,14 @@
                     <h5 class="mb-3">Ijazah</h5>
                     <a href="{{ asset($pelamar->ijazah) }}" target="_blank">
                         <img src="{{ asset($pelamar->ijazah) }}" alt="Ijazah" style="max-width: 200px;">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <h5 class="mb-3">CV</h5>
+                    <a href="{{ asset($pelamar->cv) }}" target="_blank">
+                        <img src="{{ asset($pelamar->cv) }}" alt="cv" style="max-width: 200px;">
                     </a>
                 </div>
             </div>

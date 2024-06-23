@@ -25,13 +25,11 @@ return new class extends Migration
             $table->string('ijazah')->nullable();
             $table->string('transkip_nilai')->nullable();
             $table->string('cv')->nullable();
-            $table->unsignedBigInteger('skil_id')->nullable();
             $table->timestamps();
 
             // Foreign keys
             $table->foreign('jurusan_id')->references('id')->on('jurusans');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('skil_id')->references('id')->on('skils');
 
         });
     }

@@ -28,7 +28,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->gambar }}</td>
+                            <td>
+                                <img src="{{ asset( $user->gambar) }}" alt="Profile Picture" width="50" height="50">
+                            </td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->roles }}</td>
                             <td>

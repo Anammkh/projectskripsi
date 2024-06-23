@@ -20,19 +20,27 @@ class Lowongan extends Model
         'kota',
     ];
 
-    public function jurusan()
+    public function jurusans()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsToMany(Jurusan::class, 'lowongan_jurusan', 'lowongan_id', 'jurusan_id');
     }
 
+    // Relasi dengan Skil
+    public function skils()
+    {
+        return $this->belongsToMany(Skil::class, 'lowongan_skil', 'lowongan_id', 'skil_id');
+    }
+
+    // Relasi dengan Mitra
     public function mitra()
     {
         return $this->belongsTo(Mitra::class);
     }
 
-    public function skil()
+    public function getPersyaratanAttribute($value)
     {
-        return $this->belongsTo(Skil::class);
+        return json_decode($value, true);
     }
+
 }
 

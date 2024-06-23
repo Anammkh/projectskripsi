@@ -17,11 +17,11 @@ class LowonganController extends Controller
 {
     public function index()
     {
-        $lowongans = Lowongan::all();
+        $lowongans = Lowongan::with('skils', 'jurusans')->get();
         return view('Admin.lowongan', compact('lowongans'));
     }
     public function indexPelamar()
-{
+    {
     $pelamarId = Auth::id();
 
     $lowongans = Lowongan::where('batas_waktu', '>=', now())
@@ -30,9 +30,9 @@ class LowonganController extends Controller
     $appliedJobIds = Lamaran::where('pelamar_id', $pelamarId)->pluck('lowongan_id')->toArray();
 
     return view('Pelamar.semualowongan', compact('lowongans', 'appliedJobIds', 'jurusans'));
-}
-        public function lamar(Lowongan $lowongan)
-        {
+    }
+     public function lamar(Lowongan $lowongan)
+    {
             $pelamarId = Auth::id();
             $lowonganId = $lowongan->id;
 
@@ -44,7 +44,7 @@ class LowonganController extends Controller
             ]);
 
             return redirect()->route('Admin.lamaran')->with('success', 'Lamaran berhasil dikirim.');
-        }
+     }
 
     public function create()
     {
@@ -58,20 +58,35 @@ class LowonganController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi data input
         $request->validate([
-            'judul' => 'required',
+            'judul' => 'required|string|max:255',
             'batas_waktu' => 'required|date',
-            'posisi' => 'required',
-            'persyaratan' => 'required',
-            'jurusan_id' => 'required|integer',
-            'mitra_id' => 'required|integer',
-            'skil_id' => 'required|integer',
+            'posisi' => 'required|string|max:255',
+            'persyaratan.*' => 'required|string',
+            'jurusan_id' => 'required|array',
+            'jurusan_id.*' => 'exists:jurusans,id',
+            'mitra_id' => 'required|exists:mitras,id',
+            'skil_id' => 'required|array',
+            'skil_id.*' => 'exists:skils,id',
+            'kota' => 'required',
         ]);
 
-        Lowongan::create($request->all());
+        $lowongan = new Lowongan();
+        $lowongan->judul = $request->judul;
+        $lowongan->batas_waktu = $request->batas_waktu;
+        $lowongan->posisi = $request->posisi;
+        $lowongan->persyaratan = json_encode($request->persyaratan);
+        $lowongan->mitra_id = $request->mitra_id;
+        $lowongan->kota = $request->kota; 
+        $lowongan->save();
 
-        return redirect()->route('lowongan.index')
-            ->with('success', 'Lowongan berhasil dibuat.');
+        // Attach jurusan_id dan skil_id ke lowongan
+        $lowongan->jurusans()->sync($request->jurusan_id);
+        $lowongan->skils()->sync($request->skil_id);
+
+        // Redirect ke halaman index lowongan dengan pesan sukses
+        return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil ditambahkan');
     }
 
     public function show(Lowongan $lowongan)
@@ -84,26 +99,51 @@ class LowonganController extends Controller
             $jurusans = Jurusan::all();
             $mitras = Mitra::all();
             $skils = Skil::all();
-            return view('Admin.editlowongan', compact('lowongan', 'jurusans', 'mitras', 'skils'));
+            $response = Http::get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+            $provinces = $response->json();
+            return view('Admin.editlowongan', compact('lowongan', 'jurusans', 'mitras', 'skils','provinces'));
         }
     }
 
-    public function update(Request $request, Lowongan $lowongan)
+    public function update(Request $request, $id)
     {
+        // Validasi data yang dikirim dari form
         $request->validate([
-            'judul' => 'required',
+            'judul' => 'required|string|max:255',
             'batas_waktu' => 'required|date',
-            'posisi' => 'required',
-            'persyaratan' => 'required',
-            'jurusan_id' => 'required|integer',
-            'mitra_id' => 'required|integer',
-            'skil_id' => 'required|integer',
+            'posisi' => 'required|string|max:255',
+            'persyaratan.*' => 'required|string|max:255', // Validasi untuk array persyaratan
+            'jurusan_id' => 'required|exists:jurusans,id', // Validasi untuk jurusan_id yang harus ada di tabel jurusans
+            'mitra_id' => 'required|exists:mitras,id', // Validasi untuk mitra_id yang harus ada di tabel mitras
+            'skil_id.*' => 'required|exists:skils,id', // Validasi untuk array skil_id
+            'kota' => 'required|string|max:255', // Validasi untuk kota
         ]);
 
-        $lowongan->update($request->all());
+        // Ambil data lowongan yang akan diupdate
+        $lowongan = Lowongan::findOrFail($id);
 
-        return redirect()->route('lowongan.index')
-            ->with('success', 'Lowongan berhasil diperbarui.');
+        // Update data lowongan dengan data baru
+        $lowongan->judul = $request->judul;
+        $lowongan->batas_waktu = $request->batas_waktu;
+        $lowongan->posisi = $request->posisi;
+        $lowongan->persyaratan = json_encode($request->persyaratan); // Konversi persyaratan menjadi JSON
+
+        // Simpan perubahan
+        $lowongan->save();
+
+        // Sync relasi many-to-many jurusan_id dan skil_id
+        $lowongan->jurusans()->sync($request->jurusan_id);
+        $lowongan->skils()->sync($request->skil_id);
+
+        // Update mitra_id dan kota pada lowongan
+        $lowongan->mitra_id = $request->mitra_id;
+        $lowongan->kota = $request->kota;
+
+        // Simpan perubahan sekali lagi
+        $lowongan->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil diperbarui');
     }
 
     public function destroy(Lowongan $lowongan)
@@ -123,14 +163,14 @@ class LowonganController extends Controller
    public function recommendJobs()
 {
     $user = Auth::user();
-    $pelamar = Pelamar::where('user_id', $user->id)->firstOrFail();
-
+    $pelamar = Pelamar::with('jurusan', 'skils')->where('user_id', $user->id)->firstOrFail();
+    
     if (!$this->isProfileComplete($pelamar)) {
         $recommendations = -2;
         return view('recommendations', compact('recommendations'));
     }
 
-    $jobs = Lowongan::with('jurusan', 'skil')->get();
+    $jobs = Lowongan::with('jurusans', 'skils','mitra')->get();
 
     if ($jobs->isEmpty()) {
         $recommendations = -1;
@@ -140,16 +180,11 @@ class LowonganController extends Controller
     $jurusans = Jurusan::pluck('nama')->toArray();
     $skills = Skil::pluck('nama')->toArray();
     $kotas = Lowongan::pluck('kota')->unique()->toArray();
-    
-    
     $pelamarVector = $this->createVector($pelamar, 'pelamar', $jurusans, $skills, $kotas);
     $similarities = [];
-
-    // Calculate cosine similarity for each job
     foreach ($jobs as $job) {
         $jobVector = $this->createVector($job, 'job', $jurusans, $skills, $kotas);
         $similarity = $this->cosineSimilarity($pelamarVector, $jobVector);
-
         $similarities[] = [
             'job' => $job,
             'similarity' => $similarity
@@ -164,43 +199,48 @@ class LowonganController extends Controller
     });
 
     $recommendations = $filteredSimilarities;
+    // dd($filteredSimilarities);
     return view('recommendations', compact('recommendations'));
 }
 
 private function isProfileComplete($pelamar)
 {
-    return !empty($pelamar->kota) && !empty($pelamar->skil_id) && !empty($pelamar->jurusan_id);
+    return !empty($pelamar->kota) && $pelamar->skils->isNotEmpty() && $pelamar->jurusan_id;
 }
+
 
 private function createVector($entity, $type, $jurusans, $skills, $kotas)
 {
+    
     $vector = array_fill(0, count($jurusans) + count($skills) + count($kotas), 0);
 
-    $jurusanIndex = array_search($entity->jurusan->nama, $jurusans);
-    $skillIndex = array_search($entity->skil->nama, $skills);
-    $kotaIndex = array_search($entity->kota, $kotas);
-
-    if ($kotaIndex !== false) {
-        $vector[count($jurusans) + count($skills) + $kotaIndex] = 1;
-    }
-
-    if ($jurusanIndex !== false) {
-        $vector[$jurusanIndex] = 1;
-    }
-
-    if ($skillIndex !== false) {
-        $vector[count($jurusans) + $skillIndex] = 1;
-    }
-
-    if ($type === 'pelamar') {
-        if ($kotaIndex !== false) {
-            $vector[count($jurusans) + count($skills) + $kotaIndex] = 1;
+    // Set Jurusan vector
+    if ($type == 'pelamar') {
+        $jurusanIndex = array_search($entity->jurusan->nama, $jurusans);
+        if ($jurusanIndex !== false) {
+            $vector[$jurusanIndex] = 1;
         }
     } else {
-        $mitraKotaIndex = array_search($entity->kota, $kotas);
-        if ($mitraKotaIndex !== false) {
-            $vector[count($jurusans) + count($skills) + $mitraKotaIndex] = 1;
+        foreach ($entity->jurusans as $jurusan) {
+            $jurusanIndex = array_search($jurusan->nama, $jurusans);
+            if ($jurusanIndex !== false) {
+                $vector[$jurusanIndex] = 1;
+            }
         }
+    }
+
+    // Set Skill vector
+    foreach ($entity->skils as $skill) {
+        $skillIndex = array_search($skill->nama, $skills);
+        if ($skillIndex !== false) {
+            $vector[count($jurusans) + $skillIndex] = 1;
+        }
+    }
+
+    // Set Kota vector
+    $kotaIndex = array_search($entity->kota, $kotas);
+    if ($kotaIndex !== false) {
+        $vector[count($jurusans) + count($skills) + $kotaIndex] = 1;
     }
 
     return $vector;

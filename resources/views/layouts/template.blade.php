@@ -5,7 +5,7 @@
 <!-- Mirrored from shreyu.coderthemes.com/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Oct 2023 02:22:42 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>BKK SMK 1 Kandeman</title>
+        <title>Kandemanbkk 1 Kandeman</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -16,6 +16,7 @@
         <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.ico">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 		<!-- App css -->
 		<link href="{{asset('assets')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -26,265 +27,33 @@
 
 		<!-- icons -->
 		<link href="{{asset('assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
-        
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     </head>
+    <style>
+        .select2-selection__choice {
+            background-color: #007bff !important; /* Warna latar belakang biru */
+            border-color: #007bff !important; /* Warna border biru */
+            color: white !important; /* Warna teks putih */
+        }
+        .select2-selection__choice__remove {
+            color: white !important; /* Warna ikon "x" putih */
+        }
+    </style>
 
     <body class="loading" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
 
         <!-- Begin page -->
         <div id="wrapper">
-
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <div class="container-fluid">
                     <ul class="list-unstyled topnav-menu float-end mb-0">
-
-                        <li class="d-none d-lg-block">
-                            <form class="app-search">
-                                <div class="app-search-box dropdown">
-                        
-                                    <div class="input-group">
-                                        <input type="search" class="form-control" placeholder="Search..." id="top-search">
-                                        <button class="btn input-group-text" type="submit">
-                                            <i class="uil uil-search"></i>
-                                        </button>
-                                    </div>
-
-                                    <div class="dropdown-menu dropdown-lg" id="search-dropdown">
-                                        <!-- item-->
-                                        <div class="dropdown-header noti-title">
-                                            <h5 class="text-overflow mb-2">Found 05 results</h5>
-                                        </div>
-                            
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <i class="uil uil-sliders-v-alt me-1"></i>
-                                            <span>User profile settings</span>
-                                        </a>
-
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <i class="uil uil-home-alt me-1"></i>
-                                            <span>Analytics Report</span>
-                                        </a>
-            
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <i class="uil uil-life-ring me-1"></i>
-                                            <span>How can I help you?</span>
-                                        </a>
-
-                                        <!-- item-->
-                                        <div class="dropdown-header noti-title">
-                                            <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
-                                        </div>
-
-                                        <div class="notification-list">
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                                <div class="d-flex text-align-start">
-                                                    <img class="me-2 rounded-circle" src="{{asset('assets')}}/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
-                                                    <div class="flex-grow-1">
-                                                        <h5 class="m-0 fs-14">Shirley Miller</h5>
-                                                        <span class="fs-12 mb-0">UI Designer</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                                <div class="d-flex text-align-start">
-                                                    <img class="me-2 rounded-circle" src="{{asset('assets')}}/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
-                                                    <div class="flex-grow-1">
-                                                        <h5 class="m-0 fs-14">Timothy Moreno</h5>
-                                                        <span class="fs-12 mb-0">Frontend Developer</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-            
-                                    </div>  
-                                </div>
-                            </form>
-                        </li>
-    
-                        <li class="dropdown d-inline-block d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i data-feather="search"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                                <form class="p-3">
-                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="search here">
-                                </form>
-                            </div>
-                        </li>
-    
-                        <li class="dropdown d-none d-lg-inline-block">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="fullscreen" href="#">
-                                <i data-feather="maximize"></i>
-                            </a>
-                        </li>
-    
-                        <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i data-feather="grid"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-    
-                                <div class="p-1">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{asset('assets')}}/images/brands/slack.png" alt="slack">
-                                                <span>Slack</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{asset('assets')}}/images/brands/github.png" alt="Github">
-                                                <span>GitHub</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{asset('assets')}}/images/brands/dribbble.png" alt="dribbble">
-                                                <span>Dribbble</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                            </div>
-                        </li>
-    
-                        <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i data-feather="globe"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{asset('assets')}}/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> 
-                                    <span class="align-middle">English</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{asset('assets')}}/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> 
-                                    <span class="align-middle">German</span>
-                                </a>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{asset('assets')}}/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> 
-                                    <span class="align-middle">Italian</span>
-                                </a>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{asset('assets')}}/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> 
-                                    <span class="align-middle">Spanish</span>
-                                </a>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{asset('assets')}}/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> 
-                                    <span class="align-middle">Russian</span>
-                                </a>
-    
-                            </div>
-                        </li>
-            
                         <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i data-feather="bell"></i>
-                                <span class="badge bg-danger rounded-circle noti-icon-badge">6</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-    
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="m-0">
-                                        <span class="float-end">
-                                            <a href="#" class="text-dark"><small>Clear All</small></a>
-                                        </span>Notification
-                                    </h5>
-                                </div>
-    
-                                <div class="noti-scroll" data-simplebar>
-    
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                        <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
-                                        <p class="notify-details">New user registered.<small class="text-muted">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                        <div class="notify-icon">
-                                            <img src="{{asset('assets')}}/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
-                                        </div>
-                                        <p class="notify-details">Karen Robinson</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Wow ! this admin looks good and awesome design</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                        <div class="notify-icon">
-                                            <img src="{{asset('assets')}}/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
-                                        </div>
-                                        <p class="notify-details">Cristina Pride</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Hi, How are you? What about our next meeting</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom active">
-                                        <div class="notify-icon bg-success"><i class="uil uil-comment-message"></i> </div>
-                                        <p class="notify-details">
-                                            Jaclyn Brunswick commented on Dashboard<small class="text-muted">1 min ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                        <div class="notify-icon bg-danger"><i class="uil uil-comment-message"></i></div>
-                                        <p class="notify-details">
-                                            Caleb Flakelar commented on Admin<small class="text-muted">4 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="uil uil-heart"></i>
-                                        </div>
-                                        <p class="notify-details">
-                                            Carlos Crouch liked <b>Admin</b> <small class="text-muted">13 days ago</small>
-                                        </p>
-                                    </a>
-                                </div>
-    
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    View all <i class="fe-arrow-right"></i>
-                                </a>
-    
-                            </div>
-                        </li>
-    
-                        <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{asset('assets')}}/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                            <a class="nav-link nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="  {{ Auth::user()->gambar ? asset(Auth::user()->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
-                                    Nik Patel <i class="uil uil-angle-down"></i> 
+                                    {{ Auth::user()->name }}  <i class="uil uil-angle-down"></i> 
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -301,7 +70,6 @@
                                     <i data-feather="lock" class="icon-dual icon-xs me-1"></i><span>Lock Screen</span>
                                 </a>
 
-                                <div class="dropdown-divider"></div>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -326,27 +94,26 @@
                     </ul>
     
                     <!-- LOGO -->
-                    <div class="logo-box">
+                    <div class="logo-box d-flex align-items-center justify-content-between my-2">
                         <a href="index.html" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{asset('assets')}}/images/logo-sm.png" alt="" height="24">
-                                <!-- <span class="logo-lg-text-light">Shreyu</span> -->
+                                <img src="{{ asset('images/bkk.png') }}" alt="Logo Dark" height="30">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{asset('assets')}}/images/logo-dark.png" alt="" height="24">
-                                <!-- <span class="logo-lg-text-light">S</span> -->
+                                <img src="{{ asset('images/bkk.png') }}" alt="Logo Dark" height="100">
                             </span>
                         </a>
-                    
+                        
                         <a href="index.html" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{asset('assets')}}/images/logo-sm.png" alt="" height="24">
-                            </span>
+                                <img src="{{ asset('images/bkk.png') }}" alt="Logo Light" height="30">
+                             </span>
                             <span class="logo-lg">
-                                <img src="{{asset('assets')}}/images/logo-light.png" alt="" height="24">
+                                <img src="{{ asset('images/bkk.png') }}" alt="Logo Light" height="100">
                             </span>
                         </a>
                     </div>
+                    
                     
                     
     
@@ -375,7 +142,7 @@
             <!-- end Topbar -->
 
             <!-- ========== Left Sidebar Start ========== -->
-            <div class="left-side-menu">
+            <div class="left-side-menu shadow">
 
                 <div class="h-100" data-simplebar>
 
@@ -413,68 +180,71 @@
 
                         <ul id="side-menu">
 
-                            <!-- <li class="menu-title">Navigation</li> -->
+                            
 
-                            <li>
-                                <a href="/home">
-                                    <i data-feather="home"></i>
-                                    <span> Dashboards </span>
-                                    <!-- <span class="menu-arrow"></span> -->
-                                </a>
-                            </li>
+      <li class="{{ Request::is('home') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/home" class="{{ Request::is('home') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-home"></i> <!-- Menggunakan ikon 'home' untuk home -->
+            <span> Dashboards </span>
+        </a>
+    </li>
 
-                            <li class="menu-title mt-2">Apps</li>
+    <li class="menu-title mt-2">Apps</li>
 
-                            <li>
-                                <a href="/pelamar">
-                                    <i data-feather="calendar"></i>
-                                    <span>Pelamar </span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('pelamar') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/pelamar" class="{{ Request::is('pelamar') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-users"></i> <!-- Menggunakan ikon 'users' untuk pelamar -->
+            <span> Pelamar </span>
+        </a>
+    </li>
 
-                            <li>
-                                <a href="/lamaran">
-                                    <i data-feather="message-square"></i>
-                                    <span> Lamaran </span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('lamaran') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/lamaran" class="{{ Request::is('lamaran') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-file-alt"></i> <!-- Menggunakan ikon 'file-alt' untuk lamaran -->
+            <span> Lamaran </span>
+        </a>
+    </li>
 
-                            <li>
-                                <a href="/mitra" >
-                                    <i data-feather="mail"></i>
-                                    <span> Mitra </span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('mitra') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/mitra" class="{{ Request::is('mitra') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-handshake"></i> <!-- Menggunakan ikon 'handshake' untuk mitra -->
+            <span> Mitra </span>
+        </a>
+    </li>
 
-                            <li>
-                                <a href="/jurusan">
-                                    <i data-feather="briefcase"></i>
-                                    <span> Jurusan </span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('jurusan') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/jurusan" class="{{ Request::is('jurusan') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-book-open"></i> <!-- Menggunakan ikon 'book-open' untuk jurusan -->
+            <span> Jurusan </span>
+        </a>
+    </li>
 
-                            <li>
-                                <a href="/skil">
-                                    <i data-feather="clipboard"></i>
-                                    <span> Skils</span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('skil') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/skil" class="{{ Request::is('skil') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-star"></i> <!-- Menggunakan ikon 'star' untuk skill -->
+            <span> Skills </span>
+        </a>
+    </li>
 
-                            <li>
-                                <a href="/lowongan">
-                                    <i data-feather="file-plus"></i>
-                                    <span> Lowongan </span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('lowongan') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/lowongan" class="{{ Request::is('lowongan') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-briefcase"></i> <!-- Menggunakan ikon 'briefcase' untuk lowongan -->
+            <span> Lowongan </span>
+        </a>
+    </li>
 
-                            <li class="menu-title mt-2">Custom</li>
+    <li class="menu-title mt-2">Custom</li>
 
-                            <li>
-                                <a href="/usermanajemen">
-                                    <i data-feather="file-text"></i>
-                                    <span> User Manajemen </span>
-                                </a>
-                            </li>
+    <li class="{{ Request::is('usermanajemen') ? 'active bg-dark bg-gradient text-white' : '' }}">
+        <a href="/usermanajemen" class="{{ Request::is('usermanajemen') ? 'text-white' : 'text-dark' }}">
+            <i class="fas fa-cog"></i> <!-- Menggunakan ikon 'cog' untuk user manajemen -->
+            <span> User Manajemen </span>
+        </a>
+    </li>
+
+   
+                            
+                            
                         </ul>
 
                     </div>
@@ -654,14 +424,7 @@
         <script src="{{asset('assets')}}/js/vendor.min.js"></script>
 
         <!-- App js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-    <!-- Inisialisasi Select2 -->
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-    </script>
+        
         <script src="{{asset('assets')}}/js/app.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Add these inside the <head> or before the closing </body> tag -->
@@ -669,7 +432,21 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- Inisialisasi Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                maximumSelectionLength: 3,
+                templateSelection: function(selected, container) {
+                    $(container).css("background-color", "#007bff"); // Set background color biru
+                    $(container).css("color", "white"); 
+                    return selected.text;
+            }
+        });
+        });
+    </script>
      @yield('scripts')
         
     </body>

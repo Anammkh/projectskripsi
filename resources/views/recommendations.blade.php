@@ -28,7 +28,18 @@
                                         <span class="fw-semibold">{{ $recommendation['job']->posisi }}</span>
                                     </p>
                                     <p class="card-text m-0"><i class="bi bi-clipboard-check"></i> Skill:
-                                        <span class="fw-semibold">{{ $recommendation['job']->skil->nama }}</span>
+                                        <span class="fw-semibold">
+                                            @foreach($recommendation['job']->skils as $skill)
+                                                {{ $skill->nama }}{{ !$loop->last ? ',' : '' }}
+                                            @endforeach
+                                        </span>
+                                    </p>
+                                    <p class="card-text m-0"><i class="bi bi-clipboard-check"></i> jurusan:
+                                        <span class="fw-semibold">
+                                            @foreach($recommendation['job']->jurusans as $jurusan)
+                                                {{ $jurusan->nama }}{{ !$loop->last ? ',' : '' }}
+                                            @endforeach
+                                        </span>
                                     </p>
                                     <p class="card-text m-0"><i class="bi bi-calendar-check"></i> Batas waktu:
                                         <span
@@ -36,7 +47,6 @@
                                     </p>
                                     <p class="card-text"><strong>Kesamaan:</strong>
                                         {{ round($recommendation['similarity'] * 100, 2) }}%</p>
-                                    <p class="card-text mt-2">{{ $recommendation['job']->persyaratan }}</p>
                                     <p class="card-text"><small class="text-muted">Tanggal Posting:
                                             {{ \Carbon\Carbon::parse($recommendation['job']->created_at)->format('d F Y') }}</small>
                                     </p>

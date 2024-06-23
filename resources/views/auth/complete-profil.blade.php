@@ -66,15 +66,12 @@
                             <input type="text" class="form-control" id="no_hp" name="no_hp"
                                 value="{{ $pelamar->no_hp }}">
                         </div>
+                       
                         <div class="form-group mb-2">
-                            <label class="mb-1" for="skil_id">Skill</label>
-                            <select class="form-control" id="skil_id" name="skil_id" required>
-                                <option value="" disabled>Pilih Skil</option>
-                                @foreach ($skils as $skil)
-                                    <option value="{{ $skil->id }}"
-                                        {{ $pelamar->skil_id == $skil->id ? 'selected' : '' }}>
-                                        {{ $skil->nama }}
-                                    </option>
+                            <label for="skil_id">Skil</label>
+                            <select name="skil_id[]" id="skil_id" class="form-control select2" multiple="multiple" required>
+                                @foreach($skils as $skil)
+                                    <option value="{{ $skil->id }}" {{ in_array($skil->id, $pelamar->skils->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $skil->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
