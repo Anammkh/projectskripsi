@@ -181,9 +181,11 @@ class LowonganController extends Controller
     $skills = Skil::pluck('nama')->toArray();
     $kotas = Lowongan::pluck('kota')->unique()->toArray();
     $pelamarVector = $this->createVector($pelamar, 'pelamar', $jurusans, $skills, $kotas);
+   
     $similarities = [];
     foreach ($jobs as $job) {
         $jobVector = $this->createVector($job, 'job', $jurusans, $skills, $kotas);
+        $allJobVectors[] = $jobVector;
         $similarity = $this->cosineSimilarity($pelamarVector, $jobVector);
         $similarities[] = [
             'job' => $job,
@@ -194,6 +196,7 @@ class LowonganController extends Controller
         return $item['similarity'] > 0.5;
     });
 
+// dd($allJobVectors);
     usort($filteredSimilarities, function ($a, $b) {
         return $b['similarity'] <=> $a['similarity'];
     });

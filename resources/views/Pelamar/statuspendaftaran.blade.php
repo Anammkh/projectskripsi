@@ -76,7 +76,7 @@
                             <a class="nav-link active" data-status="all" onclick="filterLamaran('all')">All</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-status="pending" onclick="filterLamaran('pending')">Pending</a>
+                            <a class="nav-link" data-status="menunggu" onclick="filterLamaran('menunggu')">Pending</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-status="diterima" onclick="filterLamaran('diterima')">Diterima</a>
@@ -151,6 +151,7 @@
             url: "{{ route('lowongan.detail', '') }}/" + lowonganId,
             method: 'GET',
             success: function(response) {
+                console.log(response)
                 var mitraImageUrl = `{{ asset('images/${response.mitra.gambar}') }}`;
                 var detailHtml = `
                     <div class="card detail-card">
@@ -171,12 +172,12 @@
                                 <div class="info-text"><strong>Batas Waktu:</strong>  ${formatTanggal(response.batas_waktu)}</div>
                             </div>
                             <div class="info">
-                                <i class="bi bi-file-earmark-text-fill info-icon"></i>
-                                <div class="info-text"><strong>Persyaratan:</strong> ${response.persyaratan}</div>
+                                <i class="bi bi-mortarboard-fill info-icon"></i>
+                                <div class="info-text"><strong>Jurusan:</strong> ${response.jurusans.map(i => i.nama).join(', ')}</div>
                             </div>
                             <div class="info">
                                 <i class="bi bi-mortarboard-fill info-icon"></i>
-                                <div class="info-text"><strong>Jurusan:</strong> ${response.jurusan.nama}</div>
+                                <div class="info-text"><strong>Skills:</strong> ${response.skils.map(i => i.nama).join(', ')}</div>
                             </div>
                             <div class="info">
                                 <i class="bi bi-geo-alt-fill info-icon"></i>
@@ -185,12 +186,10 @@
                             <div class=" my-3">
                                
                             </div>
-                            <div>
-                                <h5>Persyaratan Pekerjaan</h5> 
+                           <div class="">
+                                <h5> <i class="bi bi-file-earmark-text-fill info-icon"></i> Persyaratan Pekerjaan</h5> 
                                 <ul>
-                                    <li>Persyaratan 1</li>
-                                    <li>Persyaratan 2</li>
-                                    <!-- Tambahkan persyaratan pekerjaan di sini -->
+                                    ${response.persyaratan.map(p => `<li>${p}</li>`).join('')}
                                 </ul>  
                             </div>
                         </div>

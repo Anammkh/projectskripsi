@@ -1,9 +1,9 @@
 @extends('layouts.template')
-
+@section('title','Jurusan')
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow rounded-lg">
             <div class="card-body">
                 <h4 class="header-title mt-0 mb-1">Tabel Jurusan</h4>
             </p>

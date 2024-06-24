@@ -1,8 +1,9 @@
 @extends('layouts.template')
+@section('title','Mitra')
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow rounded-lg">
             <div class="card-body">
                 @if (session('success'))
                 <div class="alert alert-success" role="alert">

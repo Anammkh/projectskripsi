@@ -29,7 +29,7 @@
     },
   });
 </script>
-    <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('images')}}/bkk.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
@@ -55,6 +55,17 @@
     <link rel="stylesheet" href="{{ asset('./css/landingpage.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
+
+<style>
+      .select2-selection__choice {
+            background-color: #007bff !important; /* Warna latar belakang biru */
+            border-color: #007bff !important; /* Warna border biru */
+            color: white !important; /* Warna teks putih */
+        }
+        .select2-selection__choice__remove {
+            color: white !important; /* Warna ikon "x" putih */
+        }
+</style>
 
 <body class="loading" data-layout-mode="horizontal"
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
@@ -182,7 +193,7 @@
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{ Auth::user()->gambar ? asset(Auth::user()->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="user-image" class="rounded-circle">
+                            <img src="{{ Auth::user()->gambar ? asset('/storage/'. Auth::user()->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="user-image" class="rounded-circle">
 
                             <span class="pro-user-name ms-1">
                              
@@ -227,21 +238,21 @@
                 <div class="logo-box">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ asset('assets') }}/images/logo-sm.png" alt="" height="24">
+                            <img src="{{asset('images')}}/bkk.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">Shreyu</span> -->
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('assets') }}/images/logo-dark.png" alt="" height="24">
+                            <img src="{{asset('images')}}/bkk.png" alt="" height="100">
                             <!-- <span class="logo-lg-text-light">S</span> -->
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ asset('assets') }}/images/logo-sm.png" alt="" height="24">
+                            <img src="{{asset('images')}}/bkk.png" alt="" height="24">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('assets') }}/images/logo-light.png" alt="" height="24">
+                            <img src="{{asset('images')}}/bkk.png" alt="" height="24">
                         </span>
                     </a>
                 </div>

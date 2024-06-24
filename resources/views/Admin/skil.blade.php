@@ -1,9 +1,9 @@
 @extends('layouts.template')
-
+@section('title','Skill')
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow rounded-lg">
             <div class="card-body">
                 @if (session('success'))
                 <div class="alert alert-success mt-2" role="alert">

@@ -3,14 +3,14 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow rounded-lg">
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
                 @endif
-                <h4 class="header-title mt-0 mb-1">Daftar pelamar</h4>
+                <h4 class="header-title mt-0 mb-1">Daftar Pelamar</h4>
                 <div class="table-responsive">
                     <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                         <thead>
@@ -20,16 +20,7 @@
                                 <th>Jenis Kelamin</th>
                                 <th>TTL</th>
                                 <th>Sekolah</th>
-                                <th>Alamat</th>
-                                <th>Tinggi</th>
-                                <th>No HP</th>
-                                <th>Jurusan</th>
-                                <th>Skill</th>
-                                <th>CV</th>
-                                <th>KTP</th>
-                                <th>Transkip Nilai</th>
-                                <th>Ijazah</th>
-                                <th>Kota</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,28 +31,102 @@
                                 <td>{{ $pelamar->jenis_kelamin }}</td>
                                 <td>{{ $pelamar->ttl }}</td>
                                 <td>{{ $pelamar->sekolah }}</td>
-                                <td>{{ $pelamar->alamat }}</td>
-                                <td>{{ $pelamar->tinggi }}</td>
-                                <td>{{ $pelamar->no_hp }}</td>
-                                <td>{{ $pelamar->jurusan->nama }}</td>
                                 <td>
-                                    @foreach ($pelamar->skils as $skil)
-                                        <span>{{ $skil->nama }},</span>
-                                    @endforeach
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailModal{{ $pelamar->id }}">
+                                        Detail
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="detailModal{{ $pelamar->id }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $pelamar->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="detailModalLabel{{ $pelamar->id }}">Detail Pelamar</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>Nama</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->user->name }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Jenis Kelamin</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->jenis_kelamin }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>TTL</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->ttl }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Sekolah</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->sekolah }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Alamat</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->alamat }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tinggi</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->tinggi }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>No HP</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->no_hp }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Jurusan</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->jurusan->nama }}" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Skill</th>
+                                                            <td><input type="text" class="form-control" value="@foreach ($pelamar->skils as $skil){{ $skil->nama }}, @endforeach" readonly></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>CV</th>
+                                                            <td>
+                                                                @if ($pelamar->cv)
+                                                                    <a href="{{ asset($pelamar->cv) }}" target="_blank" class="btn btn-link">Lihat CV</a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>KTP</th>
+                                                            <td>
+                                                                @if ($pelamar->ktp)
+                                                                    <a href="{{ asset($pelamar->ktp) }}" target="_blank" class="btn btn-link">Lihat KTP</a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Transkip Nilai</th>
+                                                            <td>
+                                                                @if ($pelamar->transkip_nilai)
+                                                                    <a href="{{ asset($pelamar->transkip_nilai) }}" target="_blank" class="btn btn-link">Lihat Transkip Nilai</a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Ijazah</th>
+                                                            <td>
+                                                                @if ($pelamar->ijazah)
+                                                                    <a href="{{ asset($pelamar->ijazah) }}" target="_blank" class="btn btn-link">Lihat Ijazah</a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Kota</th>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->kota }}" readonly></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
-                                <td>@if ($pelamar->cv)
-                                    <a href="{{ asset($pelamar->cv) }}" target="_blank">Lihat CV</a>
-                                @endif</td>
-                                <td>@if ($pelamar->ktp)
-                                    <a href="{{ asset($pelamar->ktp) }}" target="_blank">Lihat KTP</a>
-                                @endif</td>
-                                <td>@if ($pelamar->transkip_nilai)
-                                    <a href="{{ asset($pelamar->transkip_nilai) }}" target="_blank">Lihat Transkip Nilai</a>
-                                @endif</td>
-                                <td>@if ($pelamar->ijazah)
-                                    <a href="{{ asset($pelamar->ijazah) }}" target="_blank">Lihat Ijazah</a>
-                                @endif</td>
-                                <td>{{ $pelamar->kota }}</td>
                             </tr>
                             @endforeach
                         </tbody>

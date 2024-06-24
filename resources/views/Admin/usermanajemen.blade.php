@@ -1,8 +1,9 @@
 @extends('layouts.template')
+@section('title','User')
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow rounded-lg">
             <div class="card-body">
                 @if (session('success'))
                 <div class="alert alert-success" role="alert">
@@ -29,7 +30,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>
-                                <img src="{{ asset( $user->gambar) }}" alt="Profile Picture" width="50" height="50">
+                                <img src="{{ $user->gambar ? asset( '/storage/' . $user->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="Profile Picture" width="50" height="50">
                             </td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->roles }}</td>

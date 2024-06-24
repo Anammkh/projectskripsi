@@ -1,8 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    
-<!-- Mirrored from shreyu.coderthemes.com/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Oct 2023 02:22:42 GMT -->
 <head>
         <meta charset="utf-8" />
         <title>Kandemanbkk 1 Kandeman</title>
@@ -13,7 +11,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('images')}}/bkk.png">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -27,7 +25,12 @@
 
 		<!-- icons -->
 		<link href="{{asset('assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets')}}/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets')}}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets')}}/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets')}}/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
     </head>
     <style>
@@ -271,7 +274,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Starter</h4>
+                                    <h4 class="page-title">@yield('title')</h4>
                                 </div>
                             </div>
                         </div>     
@@ -433,7 +436,25 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="{{asset('assets')}}/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+    <!-- third party js ends -->
 
+    <!-- Datatables init -->
+    <script src="assets/js/pages/datatables.init.js"></script>
+    <script>
+        $('.datatables').DataTable()
+    </script>
     <!-- Inisialisasi Select2 -->
     <script>
         $(document).ready(function() {

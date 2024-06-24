@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-<div class="card">
+<div class="card shadow rounded-lg">
     <div class="card-body">
         <h4 class="header-title mb-4">Profil Pelamar</h4>
         <div class="row">
@@ -10,7 +10,7 @@
                     <tbody>
                         <tr>
                             <td><strong>Foto</strong></td>
-                            <td>:<img src="{{ asset('images/'. $pelamar->user->gambar) }}" alt="" width="100"></td>
+                            <td>:<img src="{{ asset('/storage/'. $pelamar->user->gambar) }}" alt="" width="100"></td>
                         </tr>
                         <tr>
                             <td><strong>Sekolah</strong></td>

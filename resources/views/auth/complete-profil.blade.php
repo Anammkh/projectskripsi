@@ -17,7 +17,7 @@
                         <div class="form-group mb-2">
                             <label class="mb-1" for="gambar">Gambar Profil</label>
                             <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" onchange="previewImage(event)">
-                            <img id="preview" src="{{ $pelamar->user->gambar ? asset('/storage/'.$pelamar->user->gambar) : '' }}"  style="max-width: 100px; margin-top: 10px;" alt="{{ asset('/storage/'.$pelamar->user->gambar)}}">
+                            <img id="preview" src="{{ $pelamar->user->gambar ? asset('/storage/'.$pelamar->user->gambar) : '' }}"  style="max-width: 100px; margin-top: 10px;" >
                         </div>
                         <div class="form-group mb-2">
                             <label class="mb-1" for="name">nama</label>

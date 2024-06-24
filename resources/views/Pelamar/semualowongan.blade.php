@@ -209,17 +209,18 @@
                                 <i class="bi bi-geo-alt-fill info-icon"></i>
                                 <div class="info-text"><strong>Kota:</strong> ${response.kota}</div>
                             </div>
-                            <div class=" my-3">
-                                <form method="POST" action="{{ url('lowongan/lamar') }}/${response.id}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary px-3">Lamar</button>
-                                </form>
-                            </div>
+                           
                             <div class="">
                                 <h5> <i class="bi bi-file-earmark-text-fill info-icon"></i> Persyaratan Pekerjaan</h5> 
                                 <ul>
                                     ${response.persyaratan.map(p => `<li>${p}</li>`).join('')}
                                 </ul>  
+                            </div>
+                             <div class=" my-3">
+                                <form method="POST" action="{{ url('lowongan/lamar') }}/${response.id}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary px-3">Lamar</button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,9 @@
 @extends('layouts.template')
-
+@section('title','Lamaran')
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card shadow rounded-lg">
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
@@ -29,7 +29,7 @@
                             <td>{{ $lamaran->pelamar->user->name}}</td>
                             <td>{{ $lamaran->lowongan->judul }}</td>
                             <td>{{ $lamaran->tanggal }}</td>
-                            <td>{{ $lamaran->status }}</td>
+                            <td> <span class="badge {{ $lamaran->status == 'Diterima' ? 'badge-success' : 'badge-danger' }}">{{ $lamaran->status }}</span></td>
                             <td>
                                 @if ($lamaran->status == 'Menunggu')
                                 <div class="d-flex">
@@ -65,7 +65,7 @@
                                     <a href="{{ route('pelamar.show', $lamaran->pelamar->id) }}" class="btn btn-info ml-2">Lihat Profil</a>
                                 </div>
                                 @else
-                                    <span class="badge {{ $lamaran->status == 'Diterima' ? 'badge-success' : 'badge-danger' }}">{{ $lamaran->status }}</span>
+                                   -
                                 @endif
                             </td>
                         </tr>
