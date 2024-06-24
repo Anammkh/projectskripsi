@@ -55,16 +55,6 @@
     <link rel="stylesheet" href="{{ asset('./css/landingpage.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
-<style>
-    .select2-selection__choice {
-        background-color: #007bff !important; /* Warna latar belakang biru */
-        border-color: #007bff !important; /* Warna border biru */
-        color: white !important; /* Warna teks putih */
-    }
-    .select2-selection__choice__remove {
-        color: white !important; /* Warna ikon "x" putih */
-    }
-</style>
 
 <body class="loading" data-layout-mode="horizontal"
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
@@ -102,7 +92,93 @@
                     
                     @else
                     
-                  
+                    <li class="dropdown notification-list topbar-dropdown">
+                        <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="false" aria-expanded="false">
+                            <i data-feather="bell"></i>
+                            <span class="badge bg-danger rounded-circle noti-icon-badge">6</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="m-0">
+                                    <span class="float-end">
+                                        <a href="#" class="text-dark"><small>Clear All</small></a>
+                                    </span>Notification
+                                </h5>
+                            </div>
+
+                            <div class="noti-scroll" data-simplebar>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
+                                    <p class="notify-details">New user registered.<small class="text-muted">5 hours
+                                            ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon">
+                                        <img src="{{ asset('assets') }}/images/users/avatar-1.jpg"
+                                            class="img-fluid rounded-circle" alt="" />
+                                    </div>
+                                    <p class="notify-details">Karen Robinson</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Wow ! this admin looks good and awesome design</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon">
+                                        <img src="{{ asset('assets') }}/images/users/avatar-2.jpg"
+                                            class="img-fluid rounded-circle" alt="" />
+                                    </div>
+                                    <p class="notify-details">Cristina Pride</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Hi, How are you? What about our next meeting</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom active">
+                                    <div class="notify-icon bg-success"><i class="uil uil-comment-message"></i> </div>
+                                    <p class="notify-details">
+                                        Jaclyn Brunswick commented on Dashboard<small class="text-muted">1 min
+                                            ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon bg-danger"><i class="uil uil-comment-message"></i></div>
+                                    <p class="notify-details">
+                                        Caleb Flakelar commented on Admin<small class="text-muted">4 days ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-primary">
+                                        <i class="uil uil-heart"></i>
+                                    </div>
+                                    <p class="notify-details">
+                                        Carlos Crouch liked <b>Admin</b> <small class="text-muted">13 days ago</small>
+                                    </p>
+                                </a>
+                            </div>
+
+                            <!-- All-->
+                            <a href="javascript:void(0);"
+                                class="dropdown-item text-center text-primary notify-item notify-all">
+                                View all <i class="fe-arrow-right"></i>
+                            </a>
+
+                        </div>
+                    </li>
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
@@ -148,24 +224,24 @@
                 </ul>
 
                 <!-- LOGO -->
-                <div class="logo-box ">
+                <div class="logo-box">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ asset('images/bkk.png') }}" alt="hh" height="24">
+                            <img src="{{ asset('assets') }}/images/logo-sm.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">Shreyu</span> -->
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('images/bkk.png') }}" alt="" height="100">
+                            <img src="{{ asset('assets') }}/images/logo-dark.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">S</span> -->
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ asset('images/bkk.png') }}" alt="ha" height="24">
+                            <img src="{{ asset('assets') }}/images/logo-sm.png" alt="" height="24">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('images/bkk.png') }}" alt="hi" height="24">
+                            <img src="{{ asset('assets') }}/images/logo-light.png" alt="" height="24">
                         </span>
                     </a>
                 </div>
@@ -292,14 +368,7 @@
     <!-- Inisialisasi Select2 -->
     <script>
         $(document).ready(function() {
-            $('.select2').select2({
-                maximumSelectionLength: 3,
-                templateSelection: function(selected, container) {
-                    $(container).css("background-color", "#007bff"); // Set background color biru
-                    $(container).css("color", "white"); 
-                    return selected.text;
-            }
-        });
+            $('.select2').select2();
         });
     </script>
 

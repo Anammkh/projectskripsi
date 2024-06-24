@@ -21,16 +21,14 @@ class LamaranController extends Controller
     $userId = Auth::id();
     $pelamar = Pelamar::where('user_id', $userId)->first();
 
-    // Jika data pelamar tidak ditemukan
     if (!$pelamar) {
         return redirect()->route('Pelamar.semualowongan')->with('error', 'Data pelamar tidak ditemukan.');
     }
 
-    // Memeriksa apakah semua data pelamar sudah terisi
     $requiredFields = [
         'jenis_kelamin', 'ttl', 'sekolah', 'alamat', 'tinggi', 
         'no_hp', 'jurusan_id', 'cv', 'ktp', 'transkip_nilai', 
-        'ijazah', 'skil_id','kota',
+        'ijazah','kota',
     ];
 
     foreach ($requiredFields as $field) {

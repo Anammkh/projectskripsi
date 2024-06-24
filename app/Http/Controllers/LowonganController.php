@@ -24,7 +24,7 @@ class LowonganController extends Controller
     {
     $pelamarId = Auth::id();
 
-    $lowongans = Lowongan::where('batas_waktu', '>=', now())
+    $lowongans = Lowongan::where('batas_waktu', '>=', now())->with('skils', 'jurusans')
                     ->get();
     $jurusans = Jurusan::all();
     $appliedJobIds = Lamaran::where('pelamar_id', $pelamarId)->pluck('lowongan_id')->toArray();
@@ -156,7 +156,7 @@ class LowonganController extends Controller
 
     public function showDetail($id)
     {
-        $lowongan = Lowongan::with('jurusan', 'mitra')->findOrFail($id);
+        $lowongan = Lowongan::with('jurusans', 'mitra','skils')->findOrFail($id);
         return response()->json($lowongan);
     }
 

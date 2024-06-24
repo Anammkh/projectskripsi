@@ -44,7 +44,6 @@ class UserController extends Controller
     $pelamar = Pelamar::firstOrCreate(['user_id' => $userId]);
     $user = User::find($userId);
 
-    // Handle profile image upload
     if ($request->hasFile('gambar')) {
         if ($user->gambar) {
             Storage::delete($user->gambar);
@@ -65,15 +64,12 @@ class UserController extends Controller
         }
     }
 
-    // Update user name
     $user->name = $request->input('name');
     $user->save();
 
-    // Update pelamar details except file fields
     $pelamar->fill($request->except(array_merge($fileFields, ['skil_id'])));
     $pelamar->save();
 
-    // Update skill relationships
     if ($request->has('skil_id')) {
         $pelamar->skils()->sync($request->input('skil_id'));
     }
