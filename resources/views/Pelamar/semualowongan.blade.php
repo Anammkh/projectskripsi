@@ -120,14 +120,14 @@
                                 onclick="showDetail({{ $lowongan->id }}, this)">
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset('images/' . $lowongan->mitra->gambar) }}"
-                                        style="width: 50px; height: 50px; object-fit: cover;" alt="Mitra Image">
+                                        style="width: 50px; height: 50px; object-fit: contain;" alt="Mitra Image">
                                     <div class="ms-3">
-                                        <h5 class="fw-semibold mb-1">{{ $lowongan->mitra->nama }}</h5>
+                                        <h5 class="card-title fw-semibold">{{ $lowongan->judul }}</h5>
+                                        <h6 class="fw-semibold mb-1">{{ $lowongan->mitra->nama }}</h6>
                                         <span>{{ $lowongan->mitra->alamat }}</span>
                                     </div>
                                 </div>
                                 <div class="card-body p-0 mt-2">
-                                    <h6 class="card-title fw-semibold">{{ $lowongan->judul }}</h6>
                                     <p class="card-text mb-1">Posisi: {{ $lowongan->posisi }}</p>
                                     <small class="text-muted">Posted {{ $lowongan->created_at->diffForHumans() }}</small>
                                 </div>

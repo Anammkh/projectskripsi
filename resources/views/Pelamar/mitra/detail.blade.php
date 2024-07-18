@@ -35,9 +35,6 @@
                                     {{ $item->posisi }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted" style="font-size: 1em; margin-bottom: 10px;">
                                     {{ $item->mitra->nama }}</h6>
-                                <p class="card-text m-0"><i class="bi bi-briefcase" style="margin-right: 5px;"></i> Jurusan:
-                                    <span class="fw-semibold">{{ $item->jurusan->nama }}</span>
-                                </p>
                                 <p class="card-text m-0"><i class="bi bi-calendar-check"></i> Batas waktu: <span
                                         class="fw-semibold">{{ \Carbon\Carbon::parse($item->batas_waktu)->format('d F Y') }}
                                     </span></p>

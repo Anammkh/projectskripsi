@@ -8,6 +8,9 @@ use Carbon\Carbon;
 use App\Models\lowongan;
 use App\Models\Pelamar;
 use Illuminate\Http\Request;
+use App\Notifications\LamaranDiterimaNotification;
+use App\Notifications\LamaranDitolakNotification;
+use Illuminate\Support\Facades\Notification;
 
 class LamaranController extends Controller
 {
@@ -40,7 +43,6 @@ class LamaranController extends Controller
     $pelamarId = $pelamar->id;
     $lowonganId = $lowongan->id;
 
-    // Memeriksa apakah pelamar sudah melamar lowongan ini sebelumnya
     $existingApplication = Lamaran::where('pelamar_id', $pelamarId)
         ->where('lowongan_id', $lowonganId)
         ->first();
@@ -62,29 +64,43 @@ class LamaranController extends Controller
 
     return redirect()->back()->with('success', 'Berhasil melamar untuk lowongan ini.');
 }
-
-
-    
-    
+     
 public function accept(Request $request, $id)
 {
     $request->validate([
-        'tanggal_wawancara' => 'required|date',
+        'tanggal_wawancara' => 'required|date_format:Y-m-d',
+        'jam_wawancara' => 'required|date_format:H:i',
     ]);
 
     $lamaran = Lamaran::findOrFail($id);
     $lamaran->status = 'Diterima';
     $lamaran->tanggal_wawancara = $request->tanggal_wawancara;
+    $lamaran->jam_wawancara = $request->jam_wawancara;
     $lamaran->save();
+
+    $pelamar = $lamaran->pelamar;
+    $user = $pelamar->user;
+
+    Notification::send($user, new LamaranDiterimaNotification($lamaran));
 
     return redirect()->route('lamaran.index')->with('success', 'Lamaran berhasil diterima.');
 }
 
-    public function reject(Lamaran $lamaran)
-    {
-        $lamaran->update(['status' => 'Ditolak']);
-        return redirect()->route('lamaran.index')->with('success', 'Lamaran ditolak.');
-    }
+
+
+public function reject($id)
+{
+    $lamaran = Lamaran::findOrFail($id);
+    $lamaran->status = 'Ditolak';
+    $lamaran->save();
+
+    $pelamar = $lamaran->pelamar;
+    $user = $pelamar->user;
+
+    Notification::send($user, new LamaranDitolakNotification($lamaran));
+
+    return redirect()->route('lamaran.index')->with('success', 'Lamaran ditolak.');
+}
 
     public function statusPendaftaran()
 {

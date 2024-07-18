@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('lamarans', function (Blueprint $table) {
-            $table->timestamp('tanggal_wawancara')->nullable()->after('status');
+            $table->time('jam_wawancara')->nullable();
+
         });
     }
 

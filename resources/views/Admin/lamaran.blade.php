@@ -16,7 +16,8 @@
                         <tr>
                             <th>No</th>
                             <th>Pelamar</th>
-                            <th>Lowongan</th>
+                            <th>Posisi</th>
+                            <th>Mitra</th>
                             <th>Tanggal</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -27,7 +28,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $lamaran->pelamar->user->name}}</td>
-                            <td>{{ $lamaran->lowongan->judul }}</td>
+                            <td>{{ $lamaran->lowongan->posisi }}</td>
+                            <td>{{ $lamaran->lowongan->mitra->nama }}</td>
                             <td>{{ $lamaran->tanggal }}</td>
                             <td> <span class="badge {{ $lamaran->status == 'Diterima' ? 'badge-success' : 'badge-danger' }}">{{ $lamaran->status }}</span></td>
                             <td>
@@ -49,6 +51,11 @@
                                                         <label for="tanggal_wawancara">Tanggal Wawancara:</label>
                                                         <input type="date" class="form-control" id="tanggal_wawancara" name="tanggal_wawancara" required>
                                                     </div>
+                                                    <div class="modal-body">
+                                                        <label for="jam_wawancara">Jam Wawancara:</label>
+                                                        <input type="time" class="form-control" id="jam_wawancara" name="jam_wawancara" required>
+                                                    </div>
+                                                    
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-success">Terima</button>
@@ -68,6 +75,7 @@
                                    -
                                 @endif
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>

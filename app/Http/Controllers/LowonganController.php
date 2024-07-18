@@ -58,7 +58,6 @@ class LowonganController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data input
         $request->validate([
             'judul' => 'required|string|max:255',
             'batas_waktu' => 'required|date',
@@ -81,11 +80,9 @@ class LowonganController extends Controller
         $lowongan->kota = $request->kota; 
         $lowongan->save();
 
-        // Attach jurusan_id dan skil_id ke lowongan
         $lowongan->jurusans()->sync($request->jurusan_id);
         $lowongan->skils()->sync($request->skil_id);
 
-        // Redirect ke halaman index lowongan dengan pesan sukses
         return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil ditambahkan');
     }
 
@@ -107,7 +104,6 @@ class LowonganController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validasi data yang dikirim dari form
         $request->validate([
             'judul' => 'required|string|max:255',
             'batas_waktu' => 'required|date',
@@ -119,37 +115,35 @@ class LowonganController extends Controller
             'kota' => 'required|string|max:255', // Validasi untuk kota
         ]);
 
-        // Ambil data lowongan yang akan diupdate
         $lowongan = Lowongan::findOrFail($id);
 
-        // Update data lowongan dengan data baru
         $lowongan->judul = $request->judul;
         $lowongan->batas_waktu = $request->batas_waktu;
         $lowongan->posisi = $request->posisi;
         $lowongan->persyaratan = json_encode($request->persyaratan); // Konversi persyaratan menjadi JSON
 
-        // Simpan perubahan
         $lowongan->save();
 
-        // Sync relasi many-to-many jurusan_id dan skil_id
         $lowongan->jurusans()->sync($request->jurusan_id);
         $lowongan->skils()->sync($request->skil_id);
 
-        // Update mitra_id dan kota pada lowongan
         $lowongan->mitra_id = $request->mitra_id;
         $lowongan->kota = $request->kota;
 
-        // Simpan perubahan sekali lagi
         $lowongan->save();
 
-        // Redirect dengan pesan sukses
         return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil diperbarui');
     }
 
     public function destroy(Lowongan $lowongan)
     {
+        if ($lowongan->lamarans()->count() > 0) {
+            return redirect()->route('lowongan.index')
+                ->with('error', 'Lowongan tidak bisa dihapus karena masih ada pelamar.');
+        }
+    
         $lowongan->delete();
-
+    
         return redirect()->route('lowongan.index')
             ->with('success', 'Lowongan berhasil dihapus.');
     }
@@ -179,9 +173,10 @@ class LowonganController extends Controller
 
     $jurusans = Jurusan::pluck('nama')->toArray();
     $skills = Skil::pluck('nama')->toArray();
-    $kotas = Lowongan::pluck('kota')->unique()->toArray();
+    $pelamarKota = $pelamar->kota ? [$pelamar->kota] : [];
+    $lowonganKotas = Lowongan::pluck('kota')->toArray();
+    $kotas = array_unique(array_merge($pelamarKota, $lowonganKotas));
     $pelamarVector = $this->createVector($pelamar, 'pelamar', $jurusans, $skills, $kotas);
-   
     $similarities = [];
     foreach ($jobs as $job) {
         $jobVector = $this->createVector($job, 'job', $jurusans, $skills, $kotas);
@@ -192,17 +187,14 @@ class LowonganController extends Controller
             'similarity' => $similarity
         ];
     }
+   
     $filteredSimilarities = array_filter($similarities, function ($item) {
         return $item['similarity'] > 0.5;
     });
-
-// dd($allJobVectors);
     usort($filteredSimilarities, function ($a, $b) {
         return $b['similarity'] <=> $a['similarity'];
     });
-
     $recommendations = $filteredSimilarities;
-    // dd($filteredSimilarities);
     return view('recommendations', compact('recommendations'));
 }
 
@@ -217,7 +209,6 @@ private function createVector($entity, $type, $jurusans, $skills, $kotas)
     
     $vector = array_fill(0, count($jurusans) + count($skills) + count($kotas), 0);
 
-    // Set Jurusan vector
     if ($type == 'pelamar') {
         $jurusanIndex = array_search($entity->jurusan->nama, $jurusans);
         if ($jurusanIndex !== false) {
@@ -232,7 +223,6 @@ private function createVector($entity, $type, $jurusans, $skills, $kotas)
         }
     }
 
-    // Set Skill vector
     foreach ($entity->skils as $skill) {
         $skillIndex = array_search($skill->nama, $skills);
         if ($skillIndex !== false) {
@@ -240,7 +230,6 @@ private function createVector($entity, $type, $jurusans, $skills, $kotas)
         }
     }
 
-    // Set Kota vector
     $kotaIndex = array_search($entity->kota, $kotas);
     if ($kotaIndex !== false) {
         $vector[count($jurusans) + count($skills) + $kotaIndex] = 1;

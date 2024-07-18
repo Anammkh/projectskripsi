@@ -25,20 +25,16 @@ class Pelamar extends Model
         'kota'
     ];
 
-    // Definisikan relasi dengan tabel lain jika diperlukan
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);
     }
 
-    // Definisikan relasi dengan tabel lain jika diperlukan
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-
-    // Definisikan relasi dengan tabel lain jika diperlukan
     public function skils()
     {
         return $this->belongsToMany(Skil::class, 'pelamar_skil');

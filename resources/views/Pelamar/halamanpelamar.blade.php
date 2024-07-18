@@ -90,7 +90,7 @@
 
                     @guest
                     <!-- Jika pengguna belum login -->
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a href="{{ route('login') }}" class="nav-link">
                             <i class="bi bi-box-arrow-in-right"></i> Login
                         </a>
@@ -105,91 +105,33 @@
                     
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#"
-                            role="button" aria-haspopup="false" aria-expanded="false">
+                            role="button" aria-haspopup="false" aria-expanded="false" id="notif">
                             <i data-feather="bell"></i>
-                            <span class="badge bg-danger rounded-circle noti-icon-badge">6</span>
+                            <span class="badge bg-danger rounded-circle noti-icon-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-
-                            <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="m-0">
                                     <span class="float-end">
-                                        <a href="#" class="text-dark"><small>Clear All</small></a>
+                                        <a href="{{ route('markAsRead') }}" class="text-dark"><small>Clear All</small></a>
                                     </span>Notification
                                 </h5>
                             </div>
-
                             <div class="noti-scroll" data-simplebar>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
-                                    <p class="notify-details">New user registered.<small class="text-muted">5 hours
-                                            ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon">
-                                        <img src="{{ asset('assets') }}/images/users/avatar-1.jpg"
-                                            class="img-fluid rounded-circle" alt="" />
-                                    </div>
-                                    <p class="notify-details">Karen Robinson</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Wow ! this admin looks good and awesome design</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon">
-                                        <img src="{{ asset('assets') }}/images/users/avatar-2.jpg"
-                                            class="img-fluid rounded-circle" alt="" />
-                                    </div>
-                                    <p class="notify-details">Cristina Pride</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Hi, How are you? What about our next meeting</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom active">
-                                    <div class="notify-icon bg-success"><i class="uil uil-comment-message"></i> </div>
-                                    <p class="notify-details">
-                                        Jaclyn Brunswick commented on Dashboard<small class="text-muted">1 min
-                                            ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon bg-danger"><i class="uil uil-comment-message"></i></div>
-                                    <p class="notify-details">
-                                        Caleb Flakelar commented on Admin<small class="text-muted">4 days ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-primary">
-                                        <i class="uil uil-heart"></i>
-                                    </div>
-                                    <p class="notify-details">
-                                        Carlos Crouch liked <b>Admin</b> <small class="text-muted">13 days ago</small>
-                                    </p>
-                                </a>
+                                @foreach(auth()->user()->unreadNotifications as $notification)
+                                    <a href="{{ route('markAsRead') }}" class="dropdown-item notify-item border-bottom">
+                                        <div class="notify-icon bg-{{ $notification->data['type'] }}"><i class="uil uil-bell"></i></div>
+                                        <p class="notify-details">{{ $notification->data['message'] }}<small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small></p>
+                                    </a>
+                                @endforeach
                             </div>
-
-                            <!-- All-->
-                            <a href="javascript:void(0);"
-                                class="dropdown-item text-center text-primary notify-item notify-all">
+                            <a href="{{ route('markAsRead') }}" class="dropdown-item text-center text-primary notify-item notify-all">
                                 View all <i class="fe-arrow-right"></i>
                             </a>
-
                         </div>
                     </li>
+                    
+                    
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
@@ -314,7 +256,7 @@
                            <li class="nav-item">
                             <a class="nav-link" href="{{ route('lamaran.status') }}" id="topnav-apps"
                                 role="button" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="layers"></i> Status Pendaftaran <div></div>
+                                <i data-feather="layers"></i> Status Pendaftaran
                             </a>
                         </li>
                            @endauth
@@ -338,6 +280,21 @@
     <script src="{{ asset('assets') }}/libs/flatpickr/flatpickr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('#notif').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                fetch('{{ route('markAsRead') }}')
+                    .then(response => {
+                        console.log(response)
+                        if (response.ok) {
+                            document.querySelector('.noti-icon-badge').innerText = '0';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
     @if ($errors->any())
     <script>
         let errorMessages = '';

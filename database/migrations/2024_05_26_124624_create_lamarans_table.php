@@ -18,7 +18,6 @@ return new class extends Migration
             $table->date('tanggal');
             $table->enum('status',['Menunggu', 'Diterima','Ditolak'])->default('Menunggu');
             $table->timestamps();
-
             // Foreign keys
             $table->foreign('pelamar_id')->references('id')->on('pelamars');
             $table->foreign('lowongan_id')->references('id')->on('lowongans');

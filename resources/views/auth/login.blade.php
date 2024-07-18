@@ -9,7 +9,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{asset('images')}}/bkk.png">
 
     <!-- App css -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -20,14 +20,20 @@
 
     <!-- icons -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    
+    <style>
+        .auth-page-sidebar {
+            background: url('{{ asset('images/smk.png') }}') no-repeat cGenter center;
+            background-size: cover;
+            height: 100%;
+        }
+    </style>
 </head>
 <body class="authentication-bg">
     <div class="account-pages my-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-10">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-body p-0">
                             <div class="row g-0">
                                 <div class="col-lg-6 p-4">
@@ -95,12 +101,7 @@
                                 </div>
                                 <div class="col-lg-6 d-none d-md-inline-block">
                                     <div class="auth-page-sidebar">
-                                        <img src="{{ asset ('images') }}/bg.png" class="img-fluid" alt="Background Image" >
                                         <div class="overlay position-absolute w-100 h-100"></div>
-                                        <div class="auth-user-testimonial">
-                                            <p class="fs-24 fw-bold text-white mb-1">I simply love it!</p>
-                                            <p class="lead">"Raih Karirmu "</p>
-                                            <p>-BKK Kandeman</p>
                                         </div>
                                     </div>
                                 </div>

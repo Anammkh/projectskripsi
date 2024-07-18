@@ -7,7 +7,6 @@
             <h1 class="">Temukan Pekerjaan Impianmu Bersama BKK</h1>
             <p class="m-0">Jelajahi berbagai kesempatan karier yang sesuai dengan keahlian dan minatmu. Dapatkan pekerjaan
                 terbaik yang kamu inginkan dengan mudah dan cepat melalui BKK.</p>
-
         </div>
         <div class="row">
             <div class="col-md-">
@@ -24,14 +23,12 @@
             <div class="col-md-6">
                 <h1 class="text-start mb-2" style="font-weight: 900;">Lowongan Pekerjaan Terbaru</h1>
                 <p>Temukan berbagai lowongan pekerjaan terkini yang sesuai dengan keahlian dan minat Anda.</p>
-
             </div>
             <div class="text-end">
-                <a href="{{ route('Pelamar.semualowongan') }}" class="mt-5 fw-bold">Lihat semua lowongan <i
-                        class="bi bi-arrow-right"></i></a>
+                <a href="{{ route('Pelamar.semualowongan') }}" class="mt-5 fw-bold">Lihat semua lowongan <i class="bi bi-arrow-right"></i></a>
             </div>
             <div class="row mt-2">
-                @foreach ($jobs as $item)
+                @foreach ($jobs->take(6) as $item)  {{-- Mengambil hanya 6 lowongan --}}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-lg" style="border: 1px solid #dddddd; border-radius: 8px; overflow: hidden;">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #ddd;">
@@ -85,7 +82,6 @@
                     </div>
                 @endforeach
             </div>
-            
         </div>
     </section>
     {{-- END LOWONGAN TERBARU --}}
@@ -96,12 +92,10 @@
             <div class="col-md-6">
                 <h1 class="text-start mb-2" style="font-weight: 900;">Daftar Perusahaan</h1>
                 <p>Kenali berbagai perusahaan terkemuka yang menawarkan kesempatan karier menarik.</p>
-
             </div>
         </div>
         <div class="text-end">
-            <a href="{{ route('Pelamar.semualowongan') }}" class="mt-5 fw-bold">Lihat semua perusahaan <i
-                    class="bi bi-arrow-right"></i></a>
+            <a href="{{ route('Pelamar.semualowongan') }}" class="mt-5 fw-bold">Lihat semua perusahaan <i class="bi bi-arrow-right"></i></a>
         </div>
         <div class="swiper mySwiper mt-3">
             <div class="swiper-wrapper mb-3">
@@ -111,7 +105,6 @@
                             <div class="card shadow" style="border-bottom:6px solid rgb(54, 54, 252);border-radius:16px">
                                 <img src="{{ $mitra->gambar ? asset('images/' . $mitra->gambar) : 'https://png.pngtree.com/png-vector/20220730/ourmid/pngtree-m-company-logo-png-image_6092974.png' }}"
                                     class="p-3" style="object-fit: contain; height: 200px;" alt="Logo Perusahaan">
-
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{ $mitra->nama }}</h5>
                                     <h5 class="card-title">Lowongan tersedia: {{ $mitra->lowongan->count() }}</h5>
@@ -120,13 +113,13 @@
                         </a>
                     </div>
                 @endforeach
-
             </div>
             <div class="swiper-pagination"></div>
         </div>
     </section>
     {{-- END PERUSAHAAN --}}
 @endsection
+
 @section('footer')
     <footer class="bg-primary text-white text-center text-lg-start mt-5"
         style="background: linear-gradient(to right, #4d79f3, #1e47ff);">
@@ -199,9 +192,5 @@
                 clickable: true,
             },
         });
-    </script>
-
-    <script>
-        `zx                                                                                                    
     </script>
 @endsection

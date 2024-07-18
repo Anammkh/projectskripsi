@@ -54,7 +54,7 @@
                     <ul class="list-unstyled topnav-menu float-end mb-0">
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="  {{ Auth::user()->gambar ? asset(Auth::user()->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="user-image" class="rounded-circle">
+                                <img src="  {{ Auth::user()->gambar ? asset('/storage/'. Auth::user()->gambar) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oMra0QkSp_Z-gShMOcCIiDF5gc_0VKDKDg&s' }}" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
                                     {{ Auth::user()->name }}  <i class="uil uil-angle-down"></i> 
                                 </span>
@@ -65,7 +65,7 @@
                                     <h6 class="text-overflow m-0">Welcome !</h6>
                                 </div>
     
-                                <a href="pages-profile.html" class="dropdown-item notify-item">
+                                <a href="{{ route ('profile-admin') }}" class="dropdown-item notify-item">
                                     <i data-feather="user" class="icon-dual icon-xs me-1"></i><span>My Account</span>
                                 </a>
 
@@ -151,7 +151,6 @@
 
                     <!-- User box -->
                     <div class="user-box text-center">
-                        <img src="{{asset('assets')}}/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
                         <div class="dropdown">
                             <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown">Nik Patel</a>
                             <div class="dropdown-menu user-pro-dropdown">
@@ -192,7 +191,7 @@
         </a>
     </li>
 
-    <li class="menu-title mt-2">Apps</li>
+    <li class="menu-title mb-2">Apps</li>
 
     <li class="{{ Request::is('pelamar') ? 'active bg-dark bg-gradient text-white' : '' }}">
         <a href="/pelamar" class="{{ Request::is('pelamar') ? 'text-white' : 'text-dark' }}">
@@ -236,7 +235,7 @@
         </a>
     </li>
 
-    <li class="menu-title mt-2">Custom</li>
+    <li class="menu-title mb-2">Custom</li>
 
     <li class="{{ Request::is('usermanajemen') ? 'active bg-dark bg-gradient text-white' : '' }}">
         <a href="/usermanajemen" class="{{ Request::is('usermanajemen') ? 'text-white' : 'text-dark' }}">

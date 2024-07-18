@@ -111,10 +111,11 @@
                                 <small class="text-muted">Posted {{ $lamaran->lowongan->created_at->diffForHumans() }}</small>
                                 @if ($lamaran->status == 'Diterima')
                                 <div class="mt-3">
-                                    <strong>Tanggal Wawancara:</strong> {{ $lamaran->tanggal_wawancara }}
+                                    <strong>Tanggal Wawancara:</strong> {{ \Carbon\Carbon::parse($lamaran->tanggal_wawancara)->format('d-m-Y') }} 
+                                    <strong>Jam:</strong> {{ $lamaran->jam_wawancara }}
                                 </div>
                                 <div class="m-0">
-                                    <small class="text-danger">*Silakan datang ke SMK  untuk sesi wawancara.</small>
+                                    <small class="text-danger">*Silakan datang ke SMK untuk sesi wawancara.</small>
                                 </div>
                             @endif
                             </div>
@@ -184,7 +185,6 @@
                                 <div class="info-text"><strong>Kota:</strong> ${response.kota}</div>
                             </div>
                             <div class=" my-3">
-                               
                             </div>
                            <div class="">
                                 <h5> <i class="bi bi-file-earmark-text-fill info-icon"></i> Persyaratan Pekerjaan</h5> 

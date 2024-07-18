@@ -17,8 +17,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Logo</th>
                             <th>Nama</th>
-                            <th>Gambar</th>
                             <th>Alamat</th>
                             <th>Deskripsi</th>
                             <th>Action</th>
@@ -28,8 +28,8 @@
                         @foreach ($mitras as $mitra)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset('images/'. $mitra->gambar) }}" alt="" width="100" height="70"></td>
                             <td>{{ $mitra->nama }}</td>
-                            <td><img src="{{ asset('images/'. $mitra->gambar) }}" alt="" width="100"></td>
                             <td>{{ $mitra->alamat}}</td>
                             <td>{{ $mitra->deskripsi }}</td>
                             <td>

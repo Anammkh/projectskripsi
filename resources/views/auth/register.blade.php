@@ -9,7 +9,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{asset('images')}}/bkk.png">
 
     <!-- App css -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -20,6 +20,13 @@
 
     <!-- icons -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .auth-page-sidebar {
+            background: url('{{ asset('images/smk.png') }}') no-repeat center center;
+            background-size: cover;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body class="authentication-bg">
@@ -28,15 +35,14 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-10">
-                    <div class="card">
-                        <div class="card-body p-0">
+                    <div class="card shadow">
+                        <div class="card-body p-0 ">
                             <div class="row g-0">
                                 <div class="col-lg-6 p-4">
-                                    <div class="mx-auto">
-                                        <a href="{{ url('/') }}">
-                                            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="24" />
-                                        </a>
-                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center my-3">
+                                        <img src="{{ asset('images/smk.png') }}" alt="SMK Logo" height="50" />
+                                        <span>SMK Kandeman</span>
+                                </div>
 
                                     <h6 class="h5 mb-0 mt-3">Selamat Datang di BKK Kandeman</h6>
                                     <p class="text-muted mt-1 mb-4">Buat Akun Gratis kok</p>
@@ -118,13 +124,9 @@
                                         </div> 
                                     </form>
                                 </div>
-                                <div class="col-lg-6 d-none d-lg-inline-block">
+                                <div class="col-lg-6 d-none d-lg-inline-block align-self-stretch">
                                     <div class="auth-page-sidebar">
                                         <div class="overlay"></div>
-                                        <div class="auth-user-testimonial">
-                                            <p class="fs-24 fw-bold text-white mb-1">I simply love it!</p>
-                                            <p class="lead">"It's a elegant template. I love it very much!"</p>
-                                            <p>- Admin User</p>
                                         </div>
                                     </div>
                                 </div>

@@ -25,13 +25,11 @@ class Lowongan extends Model
         return $this->belongsToMany(Jurusan::class, 'lowongan_jurusan', 'lowongan_id', 'jurusan_id');
     }
 
-    // Relasi dengan Skil
     public function skils()
     {
         return $this->belongsToMany(Skil::class, 'lowongan_skil', 'lowongan_id', 'skil_id');
     }
 
-    // Relasi dengan Mitra
     public function mitra()
     {
         return $this->belongsTo(Mitra::class);
@@ -41,6 +39,9 @@ class Lowongan extends Model
     {
         return json_decode($value, true);
     }
-
+    public function lamarans()
+    {
+        return $this->hasMany(Lamaran::class);
+    }
 }
 

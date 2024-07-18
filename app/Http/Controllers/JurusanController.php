@@ -17,20 +17,20 @@ class JurusanController extends Controller
     {
         $request->validate(['nama' => 'required']);
         jurusan::create($request->all());
-        return redirect()->route('jurusan.index')->with('success', 'jurusanl created successfully.');
+        return redirect()->route('jurusan.index')->with('success', 'jurusan created successfully.');
     }
 
     public function update(Request $request, jurusan $jurusan)
     {
         $request->validate(['nama' => 'required']);
         $jurusan->update($request->all());
-        return redirect()->route('jurusan.index')->with('success', 'jurusanl updated successfully.');
+        return redirect()->route('jurusan.index')->with('success', 'jurusan updated successfully.');
     }
 
     public function destroy(jurusan $jurusan)
     {
         $jurusan->delete();
-        return redirect()->route('jurusan.index')->with('success', 'jurusanl deleted successfully.');
+        return redirect()->route('jurusan.index')->with('success', 'jurusan deleted successfully.');
     }
 }
 

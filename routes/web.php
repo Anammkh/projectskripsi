@@ -11,6 +11,7 @@ use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -44,6 +45,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('lamarans/{lamaran}/accept', [LamaranController::class, 'accept'])->name('lamarans.accept');
     Route::post('lamarans/{lamaran}/reject', [LamaranController::class, 'reject'])->name('lamarans.reject');
     Route::get('/pelamar/{id}', [PelamarController::class, 'show'])->name('pelamar.show');
+    Route::get('/profile-admin', [HomeController::class, 'profile'])->name('profile-admin');
+    Route::post('/profile-admin', [HomeController::class, 'updateprofile'])->name('updateprofile');
 
     Route::get('pelamar', [PelamarController::class, 'index'])->name('pelamar');
 });
@@ -57,4 +60,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/complete-profile/add', [UserController::class, 'completeProfile'])->name('complete-profile');
     Route::get('/editPassword', [LandingpageController::class, 'editPassword'])->name('edit-password');
     Route::put('/updatePassword/{id}', [LandingpageController::class, 'updatePassword'])->name('update-password');
+    Route::get('/markAsRead', [NotificationController::class, 'markAsRead'])->name('markAsRead');
 });
