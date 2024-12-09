@@ -183,9 +183,9 @@
                     <div class="card detail-card">
                         <div class="card-body">
                             <div class="info">
-                                <img src="${mitraImageUrl}" style="width: 50px; height: 50px; object-fit: cover;" alt="Mitra Image">
+                                <img src="${mitraImageUrl}" style="width: 80px; height: 50px; " alt="Mitra Image">
                                 <div class="ms-3">
-                                    <h5 class="fw-semibold mb-1">${response.mitra.nama}</h5>
+                                    <h3 class="fw-semibold mb-1">${response.mitra.nama}</h3>
                                     <span>${response.mitra.alamat}</span>
                                 </div>
                             </div>

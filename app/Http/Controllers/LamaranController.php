@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Lamaran;
 use Carbon\Carbon;
-use App\Models\lowongan;
+use App\Models\Lowongan;
 use App\Models\Pelamar;
 use Illuminate\Http\Request;
 use App\Notifications\LamaranDiterimaNotification;

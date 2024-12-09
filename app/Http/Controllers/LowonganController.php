@@ -28,7 +28,6 @@ class LowonganController extends Controller
                     ->get();
     $jurusans = Jurusan::all();
     $appliedJobIds = Lamaran::where('pelamar_id', $pelamarId)->pluck('lowongan_id')->toArray();
-
     return view('Pelamar.semualowongan', compact('lowongans', 'appliedJobIds', 'jurusans'));
     }
      public function lamar(Lowongan $lowongan)

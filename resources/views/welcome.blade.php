@@ -31,12 +31,17 @@
                 @foreach ($jobs->take(6) as $item)  {{-- Mengambil hanya 6 lowongan --}}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-lg" style="border: 1px solid #dddddd; border-radius: 8px; overflow: hidden;">
-                            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #ddd;">
-                                <img src="{{ asset('images/' . $item->mitra->gambar) }}" alt="Logo Perusahaan" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
-                                <span class="badge bg-primary" style="font-size: 0.8em; padding: 5px 10px; color: #fff; background-color: #007bff; border-radius: 3px;">
-                                    {{ strtolower($item->kota) }}
-                                </span>
-                            </div>
+                        <div class="card-header d-flex justify-content-between align-items-center" 
+                            style="background-color: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #ddd;">
+                            <img src="{{ asset('images/' . $item->mitra->gambar) }}" 
+                            alt="Logo Perusahaan" 
+                            style="width: 50px; height: 50px; object-fit: contain; border-radius: 50%; border: 1px solid #ddd; padding: 2px; background-color: #fff;">
+                            <span class="badge bg-primary" 
+                                style="font-size: 0.8em; padding: 5px 10px; color: #fff; background-color: #007bff; border-radius: 3px;">
+                                {{ strtolower($item->kota) }}
+                             </span>
+                        </div>
+
                             <div class="card-body" style="padding: 20px;">
                                 <h5 class="card-title fw-semibold" style="font-size: 1.5em; margin-bottom: 10px;">
                                     {{ $item->posisi }}

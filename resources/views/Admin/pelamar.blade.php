@@ -27,7 +27,7 @@
                             @foreach ($pelamars as $pelamar)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $pelamar->user->name }}</td>
+                                <td>{{ $pelamar->user->name ?? 'Tidak ada user'}}</td>
                                 <td>{{ $pelamar->jenis_kelamin }}</td>
                                 <td>{{ $pelamar->ttl }}</td>
                                 <td>{{ $pelamar->sekolah }}</td>
@@ -48,7 +48,7 @@
                                                     <table class="table table-bordered">
                                                         <tr>
                                                             <th>Nama</th>
-                                                            <td><input type="text" class="form-control" value="{{ $pelamar->user->name }}" readonly></td>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->user->name ?? 'Tidak ada user'}}" readonly></td>
                                                         </tr>
                                                         <tr>
                                                             <th>Jenis Kelamin</th>
@@ -76,7 +76,7 @@
                                                         </tr>
                                                         <tr>
                                                             <th>Jurusan</th>
-                                                            <td><input type="text" class="form-control" value="{{ $pelamar->jurusan->nama }}" readonly></td>
+                                                            <td><input type="text" class="form-control" value="{{ $pelamar->jurusan->nama ?? 'Tidak Ada Jurusan'  }}" readonly></td>
                                                         </tr>
                                                         <tr>
                                                             <th>Skill</th>
