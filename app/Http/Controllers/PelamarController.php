@@ -12,7 +12,7 @@ class PelamarController extends Controller
     public function index()
     {
         $pelamars = Pelamar::with('user')->whereHas('user', function ($query) {
-            $query->whereNull('deleted_at'); // Memastikan user belum dihapus (soft delete)
+            $query->whereNull('deleted_at')->where('roles', '!=', 'admin');;
         })->get();
         return view('Admin.pelamar', compact('pelamars'));
     }
